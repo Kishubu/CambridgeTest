@@ -309,8 +309,9 @@ function renderMatching(article, q, optionsContainer) {
 }
 
 function extractListItems(text) {
-  const parts = text.split(/(?=[A-E]\))/).filter(s => s.trim().length > 0);
-  return parts.map(p => p.replace(/^[A-E]\)\s*/, '').trim());
+  if (!text) return [];
+  // Les personnes sont sur des lignes séparées (pas de lettres A)-E)- devant)
+  return text.split(/\n+/).map(l => l.trim()).filter(l => l.length > 0);
 }
 
 function markSelected(el) {
