@@ -201,6 +201,11 @@ function renderMatching(article, q, optionsContainer) {
   const offers = extractListItems(offersPart);
   const people = extractListItems(peoplePart);
 
+  // État du matching : { [offreIndex]: personneIndex } ou null si délié
+  const links = state.answers[q.id] && typeof state.answers[q.id] === 'object' && !Array.isArray(state.answers[q.id])
+    ? { ...state.answers[q.id] }
+    : {};
+
   const wrap = document.createElement('div');
   wrap.className = 'matching-wrap';
 
@@ -212,21 +217,89 @@ function renderMatching(article, q, optionsContainer) {
   colPeople.className = 'matching-col';
   colPeople.innerHTML = '<h4>Personnes</h4>';
 
-  offers.forEach((opt, i) => {
+  // États visuels pour savoir quelle offre est sélectionnée en cours de lien
+  let selectedOfferIdx = null;
+
+  function renderPeopleColumn() {
+    colPeople.innerHTML = '<h4>Personnes</h4>';
+    people.forEach((opt, pIdx) => {
+      const item = document.createElement('div');
+      item.className = 'match-item';
+      // Trouver quelle offre est liée à cette personne
+      const linkedOffer = Object.entries(links).find(([o, p]) => parseInt(p, 10) === pIdx);
+      if (linkedOffer) item.classList.add('linked');
+
+      const isSelected = pIdx === selectedOfferIdx && selectedOfferIdx !== null;
+      if (isSelected) item.classList.add('active');
+
+      const letterEl = document.createElement('span');
+      letterEl.className = 'match-linked-letter';
+      letterEl.textContent = linkedOffer ? String.fromCharCode(65 + parseInt(linkedOffer[0], 10)) : '';
+
+      const numEl = document.createElement('span');
+      numEl.className = 'match-person-num';
+      numEl.textContent = (pIdx + 1).toString();
+
+      const span = document.createElement('span');
+      span.textContent = escapeHtml(opt);
+
+      item.appendChild(numEl);
+      item.appendChild(span);
+      if (linkedOffer) item.appendChild(letterEl);
+
+      item.addEventListener('click', () => {
+        if (selectedOfferIdx === null) return;
+        // Lier / délier
+        if (links[selectedOfferIdx] === pIdx) {
+          delete links[selectedOfferIdx];
+        } else {
+          // Enlever cette offre de toute autre personne si elle était liée
+          // (une offre ne peut être liée qu'à une seule personne)
+          links[selectedOfferIdx] = pIdx;
+        }
+        state.answers[q.id] = links;
+        selectedOfferIdx = null;
+        renderMatching(article, q, optionsContainer); // re-render
+      });
+      colPeople.appendChild(item);
+    });
+  }
+
+  offers.forEach((opt, oIdx) => {
     const item = document.createElement('div');
     item.className = 'match-item';
-    item.innerHTML = `<input type="radio" name="match-${q.id}" value="${i}" /><span>${escapeHtml(opt)}</span>`;
-    const input = item.querySelector('input');
-    input.addEventListener('change', () => selectOption(q.id, i));
+    const linkedPerson = links[oIdx];
+    if (linkedPerson !== undefined) item.classList.add('linked');
+
+    const letterEl = document.createElement('span');
+    letterEl.className = 'match-letter';
+    letterEl.textContent = String.fromCharCode(65 + oIdx);
+
+    const span = document.createElement('span');
+    span.textContent = escapeHtml(opt);
+
+    item.appendChild(letterEl);
+    item.appendChild(span);
+
+    item.addEventListener('click', () => {
+      if (item.classList.contains('linked')) {
+        // Décliquer = délier cette offre
+        delete links[oIdx];
+        selectedOfferIdx = null;
+        state.answers[q.id] = links;
+        renderMatching(article, q, optionsContainer);
+      } else {
+        selectedOfferIdx = oIdx;
+        renderMatching(article, q, optionsContainer);
+      }
+    });
     colOffers.appendChild(item);
   });
 
-  people.forEach((opt, i) => {
-    const item = document.createElement('div');
-    item.className = 'match-item';
-    item.innerHTML = `<input type="radio" name="match-${q.id}" value="${i + 100}" /><span>${escapeHtml(opt)}</span>`;
-    colPeople.appendChild(item);
-  });
+  renderPeopleColumn();
+
+  article.appendChild(wrap);
+}
 
   wrap.appendChild(colOffers);
   wrap.appendChild(colPeople);
@@ -346,13 +419,30 @@ function finishTest() {
             given.every((v, i) => v === expected[i]);
         }
       } else if (q.type === 'matching') {
+        // saved = { [offreIndex]: personneIndex }
+        // allCorrectLetters = lettre attendue pour chaque personne (dans l'ordre des personnes)
         const expected = (q.allCorrectLetters || []).map(l => l.toUpperCase());
-        if (saved !== undefined) {
-          const savedNum = parseInt(saved, 10);
-          const letter = savedNum < 100
-            ? String.fromCharCode(65 + savedNum)
-            : String.fromCharCode(65 + (savedNum - 100));
-          isCorrect = expected.length > 0 && letter === expected[0];
+        if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
+          // Inverser : { personneIndex: offreIndex }
+          const personToOffer = {};
+          for (const [oIdx, pIdx] of Object.entries(saved)) {
+            personToOffer[pIdx] = parseInt(oIdx, 10);
+          }
+          let allMatch = true;
+          for (let pIdx = 0; pIdx < expected.length; pIdx++) {
+            const linkedOffer = personToOffer[pIdx];
+            if (linkedOffer === undefined) {
+              allMatch = false;
+              break;
+            }
+            const expectedLetter = expected[pIdx];
+            const actualLetter = String.fromCharCode(65 + linkedOffer);
+            if (actualLetter !== expectedLetter) {
+              allMatch = false;
+              break;
+            }
+          }
+          isCorrect = allMatch && Object.keys(saved).length === expected.length;
         }
       } else {
         if (q.correctIndex !== null && saved !== undefined && parseInt(saved, 10) === q.correctIndex) {

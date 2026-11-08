@@ -401,8 +401,85 @@ body {
 }
 .score-actions { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; padding-top: 0.5rem; }
 
+/* Matching Partie 2 : colonnes Offres / Personnes */
+.matching-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+.matching-col h4 {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.25rem;
+}
+.match-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.15s;
+}
+.match-item:hover {
+  border-color: var(--primary);
+  background: #f0f7ff;
+}
+.match-item.active {
+  border-color: var(--primary);
+  background: #dbeafe;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+.match-item.linked {
+  border-color: var(--success);
+  background: #f0fdfa;
+}
+.match-letter {
+  font-weight: 800;
+  color: var(--primary);
+  width: 22px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+.match-person-num {
+  font-weight: 700;
+  color: var(--text-secondary);
+  width: 22px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+.match-linked-letter {
+  margin-left: auto;
+  font-weight: 800;
+  color: #fff;
+  background: var(--success);
+  border-radius: 4px;
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+  flex: 0 0 auto;
+}
+
 /* Safe areas mobile */
 @media (max-width: 480px) {
+  .timer { font-size: 1.5rem; }
+  .score-big { font-size: 3rem; }
+  .matching-wrap { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+
+@media (min-width: 640px) {
+  body { padding: 1.5rem; }
+  .parts-grid { grid-template-columns: repeat(2, 1fr); }
+  .screen-header h1 { font-size: 1.5rem; }
+  .timer { font-size: 2rem; }
+}
   .timer { font-size: 1.5rem; }
   .score-big { font-size: 3rem; }
 }
