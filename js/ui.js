@@ -1,3 +1,4 @@
+/* Version 2.1 — matching partie 2 corrigé */
 /**
  * ui.js — Rendu de l'interface (écrans, questions, navigation, score).
  */
