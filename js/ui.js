@@ -45,10 +45,10 @@ function formatTime(seconds) {
 /* ------------------------------------------------------------------ */
 /*  Écran d'accueil : liste des 6 parties                             */
 /* ------------------------------------------------------------------ */
-function renderHome(db) {
+function renderHome(parts) {
   const grid = $('#parts-grid');
   grid.innerHTML = '';
-  db.parts.forEach(part => {
+  parts.forEach(part => {
     const card = document.createElement('article');
     card.className = 'part-card';
     card.innerHTML = `

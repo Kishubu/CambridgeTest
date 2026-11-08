@@ -61,7 +61,7 @@ async function init() {
     state.timerSeconds = examDB.getTimerSeconds();
     log('Parties:', state.parts.length, 'timerSeconds:', state.timerSeconds);
 
-    renderHome(examDB);
+    renderHome(examDB.getParts());
     log('écran d\'accueil rendu');
 
     // Accueil
