@@ -2,56 +2,65 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CambridgeTest — Mini BDD intégrée (front-only)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cambridge B1 — Reading (entraînement)</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>🗄️ CambridgeTest</h1>
-    <p>Site front-only avec mini BDD intégrée (SQLite dans le navigateur)</p>
-  </header>
-
-  <main>
-    <section class="card add-card">
-      <h2>Ajouter une tâche</h2>
-      <form id="task-form">
-        <input type="text" id="task-title" placeholder="Titre de la tâche" required maxlength="200" />
-        <button type="submit">Ajouter</button>
-      </form>
-    </section>
-
-    <section class="card list-card">
-      <div class="card-header">
-        <h2>Mes tâches <span id="count-badge">0</span></h2>
-        <div class="controls">
-          <button id="btn-export" type="button">💾 Exporter la BDD</button>
-          <button id="btn-import" type="button">📂 Importer une BDD</button>
-          <input type="file" id="file-import" accept=".db" hidden />
-          <button id="btn-reset" type="button" class="danger">🗑️ Tout réinitialiser</button>
-        </div>
+  <!-- === ÉCRAN D'ACCUEIL === -->
+  <section id="screen-home" class="screen active">
+    <header class="screen-header">
+      <h1>🎓 Cambridge B1<br><span class="sub">Preliminary — Reading</span></h1>
+    </header>
+    <div class="home-body">
+      <p class="home-intro">Prépare-toi à l’épreuve de Reading du Cambridge B1 Preliminary. Six parties, 32 questions, 45 minutes.</p>
+      <div class="parts-grid" id="parts-grid"></div>
+      <div class="home-actions">
+        <button id="btn-start-test" class="btn btn-primary btn-large">Démarrer le test (45 min)</button>
       </div>
-      <ul id="task-list"></ul>
-      <p id="empty-msg" class="hidden">Aucune tâche pour le moment.</p>
-    </section>
+      <p class="home-note">Base de données intégrée — aucun back-end, fonctionne hors ligne une fois chargé.</p>
+    </div>
+  </section>
 
-    <section class="card info-card">
-      <h2>Comment ça marche</h2>
-      <ul>
-        <li>Aucun back-end, aucune base de données distante.</li>
-        <li>La base est un vrai <b>SQLite</b> compilé en <b>WebAssembly</b> via <a href="https://github.com/sql-js/sql.js" target="_blank" rel="noopener">sql.js</a>.</li>
-        <li>Elle est persistée dans le <b>localStorage</b> du navigateur (rechargement = retrouvez vos données).</li>
-        <li>Vous pouvez exporter/importer le fichier <code>.db</code> à tout moment.</li>
-      </ul>
-    </section>
-  </main>
+  <!-- === ÉCRAN DU TEST === -->
+  <section id="screen-test" class="screen">
+    <header class="screen-header test-header">
+      <div class="timer-wrap">
+        <div id="timer-display" class="timer">45:00</div>
+        <div id="timer-warn" class="timer-warn hidden">Temps restant : moins de 5 minutes</div>
+      </div>
+      <div class="progress-wrap">
+        <div id="progress-text" class="progress-text">Partie 1 sur 6</div>
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+      </div>
+      <button id="btn-finish-test" class="btn btn-danger btn-small">Terminer le test</button>
+    </header>
+    <div class="test-body">
+      <div id="part-nav" class="part-nav"></div>
+      <div id="test-content" class="test-content"></div>
+      <div class="test-controls">
+        <button id="btn-prev" class="btn btn-outline btn-small hidden">Précédent</button>
+        <button id="btn-next" class="btn btn-primary btn-small hidden">Suivant</button>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <p>CambridgeTest — démo front-only &amp; mini BDD intégrée</p>
-  </footer>
+  <!-- === ÉCRAN DU SCORE === -->
+  <section id="screen-score" class="screen">
+    <header class="screen-header">
+      <h1>Test terminé</h1>
+    </header>
+    <div class="score-body">
+      <div id="score-big" class="score-big">0 / 32</div>
+      <div id="score-pct" class="score-pct">0 %</div>
+      <div id="score-detail" class="score-detail"></div>
+      <div class="score-actions">
+        <button id="btn-retry" class="btn btn-primary btn-large">Refaire un test</button>
+        <button id="btn-home" class="btn btn-outline btn-large">Accueil</button>
+      </div>
+    </div>
+  </section>
 
-  <!-- sql.js (CDN) -->
-  <script src="https://unpkg.com/sql.js/dist/sql-wasm.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/app.js" type="module"></script>
 </body>
 </html>

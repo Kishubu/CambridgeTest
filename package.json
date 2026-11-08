@@ -1,12 +1,13 @@
 {
-  "name": "cambridge-front",
+  "name": "cambridge-b1-reading",
   "version": "1.0.0",
-  "description": "Site front-only avec une mini BDD intégrée (SQLite dans le navigateur via sql.js, persistance localStorage). Aucun back-end.",
+  "description": "Entraînement Cambridge B1 Preliminary Reading — front-only, base de données intégrée (JSON), minuteur 45 min, mobile-first.",
   "private": true,
   "scripts": {
     "start": "npx serve .",
-    "dev": "npx serve ."
+    "dev": "npx serve .",
+    "parse": "node scripts/parse-exam.js"
   },
-  "keywords": ["frontend", "sqlite", "sql.js", "localstorage", "spa"],
+  "keywords": ["cambridge", "b1", "reading", "exam", "frontend", "spa"],
   "author": ""
 }

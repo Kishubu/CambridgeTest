@@ -1,0 +1,618 @@
+{
+  "version": "1.0",
+  "source": "Cambridge B1 Exam.txt",
+  "generatedAt": "2026-11-08T12:47:48.309Z",
+  "totalQuestions": 32,
+  "timerSeconds": 2700,
+  "parts": [
+    {
+      "id": 1,
+      "title": "Partie 1 — Choix multiples",
+      "type": "single-choice",
+      "instruction": "Pour chaque message, choisis la proposition qui correspond à son sens.",
+      "questionCount": 5,
+      "questions": [
+        {
+          "id": "p1_q1",
+          "type": "single-choice",
+          "stimulus": "“Library notice: The upstairs room is for silent study. Please use the café for group discussions.”",
+          "options": [
+            "Groups must book the upstairs room.",
+            "Students can discuss their work in the café.",
+            "The café is only for library staff."
+          ],
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B"
+          ]
+        },
+        {
+          "id": "p1_q2",
+          "type": "single-choice",
+          "stimulus": "“Hi Jo, my parcel arrives Thursday, but I’m away until Friday. Could you keep it for me? Riley.”",
+          "options": [
+            "Riley wants Jo to send a parcel.",
+            "Riley will collect the parcel on Thursday.",
+            "Riley wants Jo to look after a delivery."
+          ],
+          "correctIndex": 2,
+          "correctLetter": "C",
+          "allCorrectLetters": [
+            "C"
+          ]
+        },
+        {
+          "id": "p1_q3",
+          "type": "single-choice",
+          "stimulus": "“Swimming pool closes at 6 p.m. Last admission: 5.15 p.m.”",
+          "options": [
+            "You must enter by 5.15 p.m.",
+            "Swimming lessons start at 6 p.m."
+          ],
+          "correctIndex": 0,
+          "correctLetter": "A",
+          "allCorrectLetters": [
+            "A"
+          ]
+        },
+        {
+          "id": "p1_q4",
+          "type": "single-choice",
+          "stimulus": "",
+          "options": [],
+          "correctIndex": null,
+          "correctLetter": null,
+          "allCorrectLetters": []
+        },
+        {
+          "id": "p1_q5",
+          "type": "single-choice",
+          "stimulus": "“This ticket is valid on weekday trains departing at 9.30 a.m. or later.”",
+          "options": [
+            "You can use it on a weekday train leaving at 10 a.m.",
+            "You can only use it at weekends.",
+            "You must finish your journey before 9.30 a.m."
+          ],
+          "correctIndex": 0,
+          "correctLetter": "A",
+          "allCorrectLetters": [
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Partie 2 — Associations",
+      "type": "matching",
+      "instruction": "Associe chaque personne à l’offre qui lui correspond.",
+      "questionCount": 5,
+      "questions": [
+        {
+          "id": "p2_q79",
+          "type": "matching",
+          "stimulus": "A) Evening swimming lessons for adult beginners. B) Competitive weekend cycling for experienced riders. C) Lunchtime yoga beside Central Office Park. Equipment provided. Personnes Maya works at Central Office Park and wants a gentle activity during her lunch break. Leo has never learned to swim and is free after work. Sara wants weekend exercise that she can enjoy with her dog.",
+          "options": [
+            "Saturday football coaching for children under twelve.",
+            "Relaxed Sunday walks. Well-behaved dogs welcome."
+          ],
+          "correctIndex": 2,
+          "correctLetter": "C",
+          "allCorrectLetters": [
+            "C",
+            "A",
+            "E"
+          ]
+        },
+        {
+          "id": "p2_q80",
+          "type": "matching",
+          "stimulus": "B) Small city-centre flat for one person. Cats welcome. Personnes Eva lives alone, has a cat and wants to be close to city-centre shops. The Martins have two young children and want to walk to school. Adam wants inexpensive accommodation with other students near his classes.",
+          "options": [
+            "Room in a shared student house, five minutes from the university.",
+            "Large country house, available for summer holidays only.",
+            "Three-bedroom family house beside a primary school.",
+            "Modern studio outside town. No animals allowed."
+          ],
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B",
+            "D",
+            "A",
+            "A"
+          ]
+        },
+        {
+          "id": "p2_q81",
+          "type": "matching",
+          "stimulus": "A) Advanced business English, weekday mornings. B) Beginner Spanish online, Tuesday evenings. D) Basic computer skills for older adults, with patient individual support. Personnes George is retired and wants help learning to send emails. Lina works during the day and wants to start Spanish from home. Ben is leaving for university and needs to learn how to cook on a budget.",
+          "options": [
+            "Weekend photography walks for experienced photographers.",
+            "Saturday cooking course: inexpensive meals for students."
+          ],
+          "correctIndex": 3,
+          "correctLetter": "D",
+          "allCorrectLetters": [
+            "D",
+            "B",
+            "E"
+          ]
+        },
+        {
+          "id": "p2_q82",
+          "type": "matching",
+          "stimulus": "C) Quick Bowl: takeaway lunches ready in five minutes. D) Candle House: quiet restaurant for adults; no large groups. E) Family Corner: children’s menu and indoor play area. Personnes Nina eats no meat or fish and wants plenty of choice. The Browns want somewhere their young children can play while waiting. Omar has only fifteen minutes to buy lunch and return to work.",
+          "options": [
+            "Green Table: entirely vegetarian menu, with several vegan dishes.",
+            "Harbour Grill: expensive seafood restaurant, open evenings only."
+          ],
+          "correctIndex": 0,
+          "correctLetter": "A",
+          "allCorrectLetters": [
+            "A",
+            "E",
+            "C",
+            "C"
+          ]
+        },
+        {
+          "id": "p2_q83",
+          "type": "matching",
+          "stimulus": "C) City break including museum entry and historical walking tours. D) Beginner surfing holiday with daily lessons and equipment. Personnes Grace enjoys long walks and wants someone to lead her through mountain routes. Pablo is interested in history and wants to visit several museums. Kate wants to try surfing but has never done it before.",
+          "options": [
+            "Luxury beach resort with evening entertainment.",
+            "Mountain walking holiday with a guide; reasonable fitness required.",
+            "Remote countryside cottage with no organised activities."
+          ],
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B",
+            "C",
+            "D"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Partie 3 — Choix multiples",
+      "type": "multiple-choice",
+      "instruction": "Lis le texte et réponds aux questions (A, B ou C).",
+      "questionCount": 5,
+      "questions": [
+        {
+          "id": "p3_q94",
+          "type": "multiple-choice",
+          "stimulus": "When our neighbourhood started a community garden, I joined because I wanted cheaper vegetables. I expected everyone to work separately, but we quickly began sharing tools and advice. My first carrots were disappointing, although my tomatoes grew well. What surprised me most was how many neighbours I got to know. I still enjoy taking fresh food home, but these days the conversations are the main reason I go. Why did the writer originally join? What surprised the writer? What is now most important to the writer?",
+          "options": [
+            "To meet expert gardeners.",
+            "To spend less on vegetables.",
+            "To sell food.",
+            "The social benefits.",
+            "The cost of tools.",
+            "The size of the garden.",
+            "Growing carrots.",
+            "Winning gardening competitions.",
+            "Talking to neighbours."
+          ],
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B",
+            "A",
+            "C"
+          ]
+        },
+        {
+          "id": "p3_q95",
+          "type": "multiple-choice",
+          "stimulus": "On my first day at a café, I was worried about carrying several plates at once. That turned out to be easier than remembering which customer had ordered each meal. My manager suggested writing down the table number immediately, and that helped. By the end of the week, I was still tired after every shift, but I no longer felt nervous when the café became busy. What was the writer initially worried about? What advice did the manager give? How did the writer feel after a week?",
+          "options": [
+            "Preparing meals.",
+            "Speaking to the manager.",
+            "Work fewer hours.",
+            "Learn the menu at home.",
+            "Record table numbers straight away.",
+            "Ready to leave.",
+            "More confident.",
+            "Less interested in customers."
+          ],
+          "correctIndex": 0,
+          "correctLetter": "A",
+          "allCorrectLetters": [
+            "A",
+            "C",
+            "B"
+          ]
+        },
+        {
+          "id": "p3_q96",
+          "type": "multiple-choice",
+          "stimulus": "I started cycling to school after my usual bus service changed. At first, I thought the journey would take longer, but I discovered a route through the park that was surprisingly quick. The only real problem is arriving with wet clothes when it rains. I now keep a spare set at school. Several friends have started joining me, so the journey has become something I look forward to. Why did the writer start cycling? What was unexpected? How does the writer deal with rainy days? A) By keeping extra clothes at school. B) By staying at home. C) By taking a taxi.",
+          "options": [
+            "Friends bought bicycles.",
+            "The bus service changed.",
+            "The number of cars.",
+            "How quick the route was.",
+            "The price of a bicycle."
+          ],
+          "correctIndex": 2,
+          "correctLetter": "C",
+          "allCorrectLetters": [
+            "C",
+            "B",
+            "A"
+          ]
+        },
+        {
+          "id": "p3_q97",
+          "type": "multiple-choice",
+          "stimulus": "I joined a local theatre group hoping to act, but all the roles had already been given out. Instead, I helped build the scenery. I discovered that I enjoyed solving practical problems, such as making a wooden door look ancient. During the performance, nobody in the audience knew my name, but hearing their reaction when the curtain opened made me proud. Next year, I may choose backstage work again. What had the writer originally hoped to do? What did the writer enjoy about the actual work? What might the writer do next year?",
+          "options": [
+            "Sell tickets.",
+            "Finding practical solutions.",
+            "Stop attending the theatre.",
+            "Only accept a leading role."
+          ],
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B",
+            "C",
+            "A"
+          ]
+        },
+        {
+          "id": "p3_q98",
+          "type": "multiple-choice",
+          "stimulus": "Our town’s repair café opens once a month. People bring broken objects, and volunteers help them repair things rather than throw them away. I took a lamp that had belonged to my grandmother. A volunteer found the problem quickly, but instead of doing everything herself, she explained each step and let me help. The lamp works again, and I feel more willing to try simple repairs at home. What is the repair café’s main purpose? How did the volunteer help the writer? A) By buying the lamp. B) By involving the writer in the repair. C) By taking the lamp away. What changed for the writer? A) An interest in collecting lamps. B) A wish to open a shop. C) Confidence about repairing things.",
+          "options": [
+            "To help people repair possessions.",
+            "To sell new electrical goods.",
+            "To collect antiques."
+          ],
+          "correctIndex": 0,
+          "correctLetter": "A",
+          "allCorrectLetters": [
+            "A",
+            "B",
+            "C"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Partie 4 — Texte à trous",
+      "type": "gap-fill",
+      "instruction": "Complète le texte en choisissant la bonne phrase pour chaque trou (A–E).",
+      "questionCount": 5,
+      "questions": [
+        {
+          "id": "p4_q109",
+          "type": "gap-fill",
+          "stimulus": "At the station, I reached into my pocket for my ticket. (1) ___ I searched my coat and bag without success. Then a woman pointed at the floor. (2) ___ I thanked her and picked it up. Just then, I heard an announcement. (3) ___ I ran towards the platform and got on just in time.",
+          "options": [
+            "My train was about to leave.",
+            "It was not where I expected it to be.",
+            "I had already arrived at my hotel.",
+            "The ticket was lying beside my bag.",
+            "She sold me a ticket for the following month."
+          ],
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B",
+            "D",
+            "A"
+          ]
+        },
+        {
+          "id": "p4_q110",
+          "type": "gap-fill",
+          "stimulus": "I was cycling home when the back of my bicycle began to feel strange. (1) ___ I stopped and phoned my uncle, who lived nearby. (2) ___ Together, we removed the wheel and repaired the problem. He explained everything as we worked. (3) ___ Next time, I may not need to call anyone.",
+          "options": [
+            "He arrived ten minutes later with a repair kit.",
+            "I had never owned a bicycle.",
+            "The back tyre was completely flat.",
+            "We decided to continue riding without checking it.",
+            "Now I understand how to fix a puncture."
+          ],
+          "correctIndex": 2,
+          "correctLetter": "C",
+          "allCorrectLetters": [
+            "C",
+            "A",
+            "E"
+          ]
+        },
+        {
+          "id": "p4_q111",
+          "type": "gap-fill",
+          "stimulus": "We wanted to surprise my sister on her birthday. Before she arrived, everyone hid in the living room. (1) ___ When she opened the front door, she called out, but nobody answered. (2) ___ Then she switched on the living-room light. (3) ___ She was so surprised that she nearly dropped her bag.",
+          "options": [
+            "She had organised the party herself.",
+            "She thought the house was empty.",
+            "We all jumped up and shouted her name.",
+            "We had agreed not to make a sound.",
+            "The guests arrived after she had gone to bed."
+          ],
+          "correctIndex": 3,
+          "correctLetter": "D",
+          "allCorrectLetters": [
+            "D",
+            "B",
+            "C"
+          ]
+        },
+        {
+          "id": "p4_q112",
+          "type": "gap-fill",
+          "stimulus": "We reached the campsite just before sunset and unpacked the tent. (1) ___ Without them, there was no way to put it up. Fortunately, the family beside us had some spare equipment. (2) ___ We thanked them and finally made our temporary home. It rained all night, but the weather changed the next morning. (3) ___ We ate breakfast outside. B) Bright sunshine warmed the campsite.",
+          "options": [
+            "That was when we realised we had forgotten the poles.",
+            "We decided that we no longer needed a tent.",
+            "The campsite had closed several years earlier.",
+            "They lent us the pieces we were missing."
+          ],
+          "correctIndex": 0,
+          "correctLetter": "A",
+          "allCorrectLetters": [
+            "A",
+            "E",
+            "B"
+          ]
+        },
+        {
+          "id": "p4_q113",
+          "type": "gap-fill",
+          "stimulus": "I went to the library to prepare for my exams. The main reading room was very busy. (1) ___ A member of staff noticed me looking around and suggested going upstairs. (2) ___ I stayed there for three hours and completed everything I had planned. (3) ___ It has become my favourite place to study. E) Every desk was already occupied.",
+          "options": [
+            "Since then, I have returned several times.",
+            "I left without doing any work.",
+            "There was a smaller room with plenty of empty desks.",
+            "The building had no upper floor."
+          ],
+          "correctIndex": 4,
+          "correctLetter": "E",
+          "allCorrectLetters": [
+            "E",
+            "C",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Partie 5 — Choix multiples (cloze)",
+      "type": "cloze",
+      "instruction": "Choisis A, B, C ou D pour chacun des blancs (1), (2), (3).",
+      "questionCount": 6,
+      "questions": [
+        {
+          "id": "p5_q124",
+          "type": "cloze",
+          "stimulus": "Last month, I made a (1) ___ to walk to work more often. On the first morning, I left too late and nearly (2) ___ an important meeting. Now I am more (3) ___ of how long the journey takes.",
+          "options": [
+            "discussion",
+            "decision",
+            "description",
+            "discovery",
+            "lost",
+            "failed",
+            "passed",
+            "missed",
+            "aware",
+            "interested",
+            "familiar",
+            "pleased"
+          ],
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B",
+            "D",
+            "A"
+          ]
+        },
+        {
+          "id": "p5_q125",
+          "type": "cloze",
+          "stimulus": "The market was so (1) ___ that we could hardly move between the stalls. It took us twenty minutes to (2) ___ the fruit seller. We decided to place an online (3) ___ next time.",
+          "options": [
+            "ordinary",
+            "private",
+            "crowded",
+            "empty",
+            "reach",
+            "arrive",
+            "enter",
+            "travel",
+            "instruction",
+            "invitation",
+            "advice",
+            "order"
+          ],
+          "correctIndex": 2,
+          "correctLetter": "C",
+          "allCorrectLetters": [
+            "C",
+            "A",
+            "D"
+          ]
+        },
+        {
+          "id": "p5_q126",
+          "type": "cloze",
+          "stimulus": "Our teacher was very (1) ___ when we struggled with the task. She repeated the (2) ___ and gave us another example. After that, everyone began to make (3) ___.",
+          "options": [
+            "patient",
+            "nervous",
+            "careless",
+            "distant",
+            "invitations",
+            "advertisements",
+            "instructions",
+            "appointments",
+            "direction",
+            "progress",
+            "movement",
+            "journey"
+          ],
+          "correctIndex": 0,
+          "correctLetter": "A",
+          "allCorrectLetters": [
+            "A",
+            "C",
+            "B"
+          ]
+        },
+        {
+          "id": "p5_q127",
+          "type": "cloze",
+          "stimulus": "We wanted to go to the theatre, but we could not (1) ___ the tickets. We waited (2) ___ Friday to see whether cheaper seats became available. When none did, we watched a film at home (3) ___.",
+          "options": [
+            "spend",
+            "cost",
+            "pay",
+            "afford",
+            "during",
+            "until",
+            "while",
+            "since",
+            "except",
+            "already",
+            "instead",
+            "rather"
+          ],
+          "correctIndex": 3,
+          "correctLetter": "D",
+          "allCorrectLetters": [
+            "D",
+            "B",
+            "C"
+          ]
+        },
+        {
+          "id": "p5_q128",
+          "type": "cloze",
+          "stimulus": "Everyone in our flat takes (1) ___ for reducing energy use. We try to (2) ___ electricity by switching off unnecessary lights. Yesterday, I noticed that someone had left the television on, so I (3) ___ it off.",
+          "options": [
+            "opportunity",
+            "responsibility",
+            "possibility",
+            "activity",
+            "save",
+            "rescue",
+            "protect",
+            "collect",
+            "brought",
+            "gave",
+            "put",
+            "turned"
+          ],
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B",
+            "A",
+            "D"
+          ]
+        },
+        {
+          "id": "p5_q129",
+          "type": "cloze",
+          "stimulus": "I was looking for a course (1) ___ for complete beginners. The college suggested one that I could (2) ___ after work. No previous (3) ___ was required.",
+          "options": [
+            "capable",
+            "similar",
+            "suitable",
+            "available",
+            "assist",
+            "visit",
+            "enter",
+            "attend",
+            "experience",
+            "experiment",
+            "explanation",
+            "examination"
+          ],
+          "correctIndex": 2,
+          "correctLetter": "C",
+          "allCorrectLetters": [
+            "C",
+            "D",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Partie 6 — Texte à trous libre",
+      "type": "open-cloze",
+      "instruction": "Complète chaque trou par le mot manquant.",
+      "questionCount": 6,
+      "questions": [
+        {
+          "id": "p6_q144",
+          "type": "open-cloze",
+          "stimulus": "I have lived in this neighbourhood (1) ___ three years. The woman (2) ___ lives next door often gives me useful advice. She knows much more about the area (3) ___ I do.",
+          "options": [],
+          "correctIndex": null,
+          "correctLetter": null,
+          "allCorrectLetters": []
+        },
+        {
+          "id": "p6_q145",
+          "type": "open-cloze",
+          "stimulus": "We need (1) ___ leave early tomorrow. My bag is (2) ___ heavy for me to carry comfortably, so I am removing a few things. I hope I will still have (3) ___ space for my lunch.",
+          "options": [],
+          "correctIndex": null,
+          "correctLetter": null,
+          "allCorrectLetters": []
+        },
+        {
+          "id": "p6_q146",
+          "type": "open-cloze",
+          "stimulus": "I (1) ___ already sent my application. I have been waiting for a reply (2) ___ Monday, but the organiser has not contacted me (3) ___.",
+          "options": [],
+          "correctIndex": null,
+          "correctLetter": null,
+          "allCorrectLetters": []
+        },
+        {
+          "id": "p6_q147",
+          "type": "open-cloze",
+          "stimulus": "The exhibition (1) ___ opened by the mayor yesterday. Most of the pictures were painted (2) ___ local artists. My favourite was a painting (3) ___ the town’s old bridge.",
+          "options": [],
+          "correctIndex": null,
+          "correctLetter": null,
+          "allCorrectLetters": []
+        },
+        {
+          "id": "p6_q148",
+          "type": "open-cloze",
+          "stimulus": "You do not (1) ___ to pay to join the walk. Maps are provided free (2) ___ charge. We look forward (3) ___ seeing you on Saturday.",
+          "options": [],
+          "correctIndex": null,
+          "correctLetter": null,
+          "allCorrectLetters": []
+        },
+        {
+          "id": "p6_q149",
+          "type": "open-cloze",
+          "stimulus": "I used (1) ___ buy lunch every day. Now I bring food from home instead (2) ___ going to a café. It is one of (3) ___ best changes I have made to my routine.",
+          "options": [],
+          "correctIndex": null,
+          "correctLetter": null,
+          "allCorrectLetters": []
+        }
+      ]
+    }
+  ]
+}

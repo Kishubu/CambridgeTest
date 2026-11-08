@@ -1,14 +1,7 @@
-# Dependencies
 node_modules/
-
-# Build / dist
 dist/
 build/
-
-# OS
 .DS_Store
 Thumbs.db
-
-# Logs
 *.log
 npm-debug.log*
