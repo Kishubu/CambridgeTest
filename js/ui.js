@@ -301,11 +301,6 @@ function renderMatching(article, q, optionsContainer) {
   article.appendChild(wrap);
 }
 
-  wrap.appendChild(colOffers);
-  wrap.appendChild(colPeople);
-  article.appendChild(wrap);
-}
-
 function extractListItems(text) {
   const parts = text.split(/(?=[A-E]\))/).filter(s => s.trim().length > 0);
   return parts.map(p => p.replace(/^[A-E]\)\s*/, '').trim());
