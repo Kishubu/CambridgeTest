@@ -11,14 +11,23 @@ class ExamDB {
 
   async load() {
     try {
-      const res = await fetch('db/questions.json', { cache: 'no-cache' });
-      if (!res.ok) throw new Error(`Impossible de charger db/questions.json (${res.status})`);
+      // Résoudre l'URL de façon robuste par rapport à la page courante (marche avec ou sans slash final,
+      // en local et sur GitHub Pages sous /CambridgeTest/).
+      const url = new URL('db/questions.json', document.baseURI);
+      const res = await fetch(url, { cache: 'no-cache' });
+      if (!res.ok) {
+        throw new Error(
+          `Impossible de charger la base de données (${url.pathname}) — HTTP ${res.status}. ` +
+          `Vérifiez que le fichier db/questions.json est bien présent et que le site est servi via un serveur HTTP.`
+        );
+      }
       this.db = await res.json();
       this.ready = true;
-      console.log('[DB] BDD chargée:', this.db.totalQuestions, 'questions,', this.db.parts.length, 'parties');
+      console.log('[DB] BDD chargée depuis', url.pathname, ':', this.db.totalQuestions, 'questions,', this.db.parts.length, 'parties');
       return this.db;
     } catch (err) {
       console.error('[DB]', err);
+      alert(err.message);
       throw err;
     }
   }
