@@ -1,0 +1,12 @@
+{
+  "name": "cambridge-front",
+  "version": "1.0.0",
+  "description": "Site front-only avec une mini BDD intégrée (SQLite dans le navigateur via sql.js, persistance localStorage). Aucun back-end.",
+  "private": true,
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": ["frontend", "sqlite", "sql.js", "localstorage", "spa"],
+  "author": ""
+}

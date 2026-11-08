@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CambridgeTest — Mini BDD intégrée (front-only)</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>🗄️ CambridgeTest</h1>
+    <p>Site front-only avec mini BDD intégrée (SQLite dans le navigateur)</p>
+  </header>
+
+  <main>
+    <section class="card add-card">
+      <h2>Ajouter une tâche</h2>
+      <form id="task-form">
+        <input type="text" id="task-title" placeholder="Titre de la tâche" required maxlength="200" />
+        <button type="submit">Ajouter</button>
+      </form>
+    </section>
+
+    <section class="card list-card">
+      <div class="card-header">
+        <h2>Mes tâches <span id="count-badge">0</span></h2>
+        <div class="controls">
+          <button id="btn-export" type="button">💾 Exporter la BDD</button>
+          <button id="btn-import" type="button">📂 Importer une BDD</button>
+          <input type="file" id="file-import" accept=".db" hidden />
+          <button id="btn-reset" type="button" class="danger">🗑️ Tout réinitialiser</button>
+        </div>
+      </div>
+      <ul id="task-list"></ul>
+      <p id="empty-msg" class="hidden">Aucune tâche pour le moment.</p>
+    </section>
+
+    <section class="card info-card">
+      <h2>Comment ça marche</h2>
+      <ul>
+        <li>Aucun back-end, aucune base de données distante.</li>
+        <li>La base est un vrai <b>SQLite</b> compilé en <b>WebAssembly</b> via <a href="https://github.com/sql-js/sql.js" target="_blank" rel="noopener">sql.js</a>.</li>
+        <li>Elle est persistée dans le <b>localStorage</b> du navigateur (rechargement = retrouvez vos données).</li>
+        <li>Vous pouvez exporter/importer le fichier <code>.db</code> à tout moment.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>CambridgeTest — démo front-only &amp; mini BDD intégrée</p>
+  </footer>
+
+  <!-- sql.js (CDN) -->
+  <script src="https://unpkg.com/sql.js/dist/sql-wasm.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
