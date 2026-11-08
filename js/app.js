@@ -12,6 +12,35 @@ import {
 
 let timer = null;
 
+// ------------------------------------------------------------------ 
+// Affichage des erreurs JS à l'écran (débogage, pas de console)
+// ------------------------------------------------------------------ 
+function showErrorBanner(msg) {
+  let banner = document.getElementById('error-banner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'error-banner';
+    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#dc2626;color:#fff;padding:0.75rem 1rem;font-family:system-ui;font-size:0.9rem;z-index:9999;box-shadow:0 2px 6px rgba(0,0,0,0.2);';
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+  banner.textContent = '⚠️ ' + msg;
+  console.error('ERREUR:', msg);
+}
+
+function log(msg) {
+  console.log('[APP]', msg);
+}
+
+// ------------------------------------------------------------------ 
+// Gestionnaire d'erreur global (affiche à l'écran si une erreur survient)
+// ------------------------------------------------------------------ 
+window.addEventListener('error', (ev) => {
+  showErrorBanner(ev.message + (ev.filename ? ' (' + ev.filename + ':' + ev.lineno + ')' : ''));
+});
+window.addEventListener('unhandledrejection', (ev) => {
+  showErrorBanner('Promise rejetée: ' + (ev.reason && ev.reason.message ? ev.reason.message : String(ev.reason)));
+});
+
 function $(sel) { return document.querySelector(sel); }
 
 function formatTime(seconds) {
@@ -24,33 +53,46 @@ function formatTime(seconds) {
 // Initialisation
 // ------------------------------------------------------------------
 async function init() {
-  await examDB.load();
-  state.parts = examDB.getParts();
-  state.timerSeconds = examDB.getTimerSeconds();
+  log('init() démarré');
+  try {
+    await examDB.load();
+    log('BDD chargée OK');
+    state.parts = examDB.getParts();
+    state.timerSeconds = examDB.getTimerSeconds();
+    log('Parties:', state.parts.length, 'timerSeconds:', state.timerSeconds);
 
-  renderHome(examDB);
+    renderHome(examDB);
+    log('écran d\'accueil rendu');
 
-  // Accueil
-  document.getElementById('btn-start-test').addEventListener('click', startTest);
-  document.getElementById('btn-retry').addEventListener('click', () => {
-    resetTest();
-    showScreen(document.getElementById('screen-home'));
-  });
-  document.getElementById('btn-home').addEventListener('click', () => {
-    resetTest();
-    showScreen(document.getElementById('screen-home'));
-  });
+    // Accueil
+    const btnStart = document.getElementById('btn-start-test');
+    log('btn-start-test présent:', !!btnStart);
+    btnStart.addEventListener('click', startTest);
 
-  // Test
-  BTN_PREV.addEventListener('click', prevQuestion);
-  BTN_NEXT.addEventListener('click', nextQuestion);
-  document.getElementById('btn-finish-test').addEventListener('click', finishTestConfirm);
+    document.getElementById('btn-retry').addEventListener('click', () => {
+      resetTest();
+      showScreen(document.getElementById('screen-home'));
+    });
+    document.getElementById('btn-home').addEventListener('click', () => {
+      resetTest();
+      showScreen(document.getElementById('screen-home'));
+    });
 
-  // Pause/reprise du timer quand l'onglet est masqué (anti-triche basique)
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && timer && timer.isRunning()) timer.pause();
-    else if (!document.hidden && timer && timer.isRunning() && !timer.isFinished()) timer.resume();
-  });
+    // Test
+    BTN_PREV.addEventListener('click', prevQuestion);
+    BTN_NEXT.addEventListener('click', nextQuestion);
+    document.getElementById('btn-finish-test').addEventListener('click', finishTestConfirm);
+
+    // Pause/reprise du timer quand l'onglet est masqué (anti-triche basique)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && timer && timer.isRunning()) timer.pause();
+      else if (!document.hidden && timer && timer.isRunning() && !timer.isFinished()) timer.resume();
+    });
+
+    log('init() terminé avec succès');
+  } catch (err) {
+    showErrorBanner('Erreur lors de l\'initialisation: ' + err.message);
+  }
 }
 
 // ------------------------------------------------------------------
