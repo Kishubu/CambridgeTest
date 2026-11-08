@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "source": "Cambridge B1 Exam.txt",
-  "generatedAt": "2026-11-08T12:47:48.309Z",
+  "generatedAt": "2026-11-08T13:23:48.129Z",
   "totalQuestions": 32,
   "timerSeconds": 2700,
   "parts": [
@@ -21,6 +21,8 @@
             "Students can discuss their work in the café.",
             "The café is only for library staff."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 1,
           "correctLetter": "B",
           "allCorrectLetters": [
@@ -36,6 +38,8 @@
             "Riley will collect the parcel on Thursday.",
             "Riley wants Jo to look after a delivery."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 2,
           "correctLetter": "C",
           "allCorrectLetters": [
@@ -50,6 +54,8 @@
             "You must enter by 5.15 p.m.",
             "Swimming lessons start at 6 p.m."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 0,
           "correctLetter": "A",
           "allCorrectLetters": [
@@ -61,6 +67,8 @@
           "type": "single-choice",
           "stimulus": "",
           "options": [],
+          "offers": null,
+          "people": null,
           "correctIndex": null,
           "correctLetter": null,
           "allCorrectLetters": []
@@ -74,6 +82,8 @@
             "You can only use it at weekends.",
             "You must finish your journey before 9.30 a.m."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 0,
           "correctLetter": "A",
           "allCorrectLetters": [
@@ -92,10 +102,22 @@
         {
           "id": "p2_q79",
           "type": "matching",
-          "stimulus": "A) Evening swimming lessons for adult beginners. B) Competitive weekend cycling for experienced riders. C) Lunchtime yoga beside Central Office Park. Equipment provided. Personnes Maya works at Central Office Park and wants a gentle activity during her lunch break. Leo has never learned to swim and is free after work. Sara wants weekend exercise that she can enjoy with her dog.",
-          "options": [
-            "Saturday football coaching for children under twelve.",
-            "Relaxed Sunday walks. Well-behaved dogs welcome."
+          "stimulus": "",
+          "options": [],
+          "offers": [
+            {
+              "letter": "D",
+              "text": "Saturday football coaching for children under twelve."
+            },
+            {
+              "letter": "E",
+              "text": "Relaxed Sunday walks. Well-behaved dogs welcome."
+            }
+          ],
+          "people": [
+            "Maya works at Central Office Park and wants a gentle activity during her lunch break.",
+            "Leo has never learned to swim and is free after work.",
+            "Sara wants weekend exercise that she can enjoy with her dog."
           ],
           "correctIndex": 2,
           "correctLetter": "C",
@@ -108,29 +130,73 @@
         {
           "id": "p2_q80",
           "type": "matching",
-          "stimulus": "B) Small city-centre flat for one person. Cats welcome. Personnes Eva lives alone, has a cat and wants to be close to city-centre shops. The Martins have two young children and want to walk to school. Adam wants inexpensive accommodation with other students near his classes.",
-          "options": [
-            "Room in a shared student house, five minutes from the university.",
-            "Large country house, available for summer holidays only.",
-            "Three-bedroom family house beside a primary school.",
-            "Modern studio outside town. No animals allowed."
+          "stimulus": "",
+          "options": [],
+          "offers": [
+            {
+              "letter": "A",
+              "text": "Room in a shared student house, five minutes from the university."
+            },
+            {
+              "letter": "C",
+              "text": "Large country house, available for summer holidays only."
+            },
+            {
+              "letter": "D",
+              "text": "Three-bedroom family house beside a primary school."
+            },
+            {
+              "letter": "E",
+              "text": "Modern studio outside town. No animals allowed."
+            }
+          ],
+          "people": [
+            "Eva lives alone, has a cat and wants to be close to city-centre shops.",
+            "The Martins have two young children and want to walk to school.",
+            "Adam wants inexpensive accommodation with other students near his classes."
           ],
           "correctIndex": 1,
           "correctLetter": "B",
           "allCorrectLetters": [
             "B",
             "D",
-            "A",
             "A"
           ]
         },
         {
           "id": "p2_q81",
           "type": "matching",
-          "stimulus": "A) Advanced business English, weekday mornings. B) Beginner Spanish online, Tuesday evenings. D) Basic computer skills for older adults, with patient individual support. Personnes George is retired and wants help learning to send emails. Lina works during the day and wants to start Spanish from home. Ben is leaving for university and needs to learn how to cook on a budget.",
-          "options": [
-            "Weekend photography walks for experienced photographers.",
-            "Saturday cooking course: inexpensive meals for students."
+          "stimulus": "",
+          "options": [],
+          "offers": null,
+          "people": null,
+          "correctIndex": 1,
+          "correctLetter": "B",
+          "allCorrectLetters": [
+            "B",
+            "D",
+            "A"
+          ]
+        },
+        {
+          "id": "p2_q82",
+          "type": "matching",
+          "stimulus": "",
+          "options": [],
+          "offers": [
+            {
+              "letter": "C",
+              "text": "Weekend photography walks for experienced photographers."
+            },
+            {
+              "letter": "E",
+              "text": "Saturday cooking course: inexpensive meals for students."
+            }
+          ],
+          "people": [
+            "George is retired and wants help learning to send emails.",
+            "Lina works during the day and wants to start Spanish from home.",
+            "Ben is leaving for university and needs to learn how to cook on a budget."
           ],
           "correctIndex": 3,
           "correctLetter": "D",
@@ -141,37 +207,31 @@
           ]
         },
         {
-          "id": "p2_q82",
+          "id": "p2_q83",
           "type": "matching",
-          "stimulus": "C) Quick Bowl: takeaway lunches ready in five minutes. D) Candle House: quiet restaurant for adults; no large groups. E) Family Corner: children’s menu and indoor play area. Personnes Nina eats no meat or fish and wants plenty of choice. The Browns want somewhere their young children can play while waiting. Omar has only fifteen minutes to buy lunch and return to work.",
-          "options": [
-            "Green Table: entirely vegetarian menu, with several vegan dishes.",
-            "Harbour Grill: expensive seafood restaurant, open evenings only."
+          "stimulus": "",
+          "options": [],
+          "offers": [
+            {
+              "letter": "A",
+              "text": "Green Table: entirely vegetarian menu, with several vegan dishes."
+            },
+            {
+              "letter": "B",
+              "text": "Harbour Grill: expensive seafood restaurant, open evenings only."
+            }
+          ],
+          "people": [
+            "Nina eats no meat or fish and wants plenty of choice.",
+            "The Browns want somewhere their young children can play while waiting.",
+            "Omar has only fifteen minutes to buy lunch and return to work."
           ],
           "correctIndex": 0,
           "correctLetter": "A",
           "allCorrectLetters": [
             "A",
             "E",
-            "C",
             "C"
-          ]
-        },
-        {
-          "id": "p2_q83",
-          "type": "matching",
-          "stimulus": "C) City break including museum entry and historical walking tours. D) Beginner surfing holiday with daily lessons and equipment. Personnes Grace enjoys long walks and wants someone to lead her through mountain routes. Pablo is interested in history and wants to visit several museums. Kate wants to try surfing but has never done it before.",
-          "options": [
-            "Luxury beach resort with evening entertainment.",
-            "Mountain walking holiday with a guide; reasonable fitness required.",
-            "Remote countryside cottage with no organised activities."
-          ],
-          "correctIndex": 1,
-          "correctLetter": "B",
-          "allCorrectLetters": [
-            "B",
-            "C",
-            "D"
           ]
         }
       ]
@@ -184,7 +244,7 @@
       "questionCount": 5,
       "questions": [
         {
-          "id": "p3_q94",
+          "id": "p3_q102",
           "type": "multiple-choice",
           "stimulus": "When our neighbourhood started a community garden, I joined because I wanted cheaper vegetables. I expected everyone to work separately, but we quickly began sharing tools and advice. My first carrots were disappointing, although my tomatoes grew well. What surprised me most was how many neighbours I got to know. I still enjoy taking fresh food home, but these days the conversations are the main reason I go. Why did the writer originally join? What surprised the writer? What is now most important to the writer?",
           "options": [
@@ -198,6 +258,8 @@
             "Winning gardening competitions.",
             "Talking to neighbours."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 1,
           "correctLetter": "B",
           "allCorrectLetters": [
@@ -207,7 +269,7 @@
           ]
         },
         {
-          "id": "p3_q95",
+          "id": "p3_q103",
           "type": "multiple-choice",
           "stimulus": "On my first day at a café, I was worried about carrying several plates at once. That turned out to be easier than remembering which customer had ordered each meal. My manager suggested writing down the table number immediately, and that helped. By the end of the week, I was still tired after every shift, but I no longer felt nervous when the café became busy. What was the writer initially worried about? What advice did the manager give? How did the writer feel after a week?",
           "options": [
@@ -220,6 +282,8 @@
             "More confident.",
             "Less interested in customers."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 0,
           "correctLetter": "A",
           "allCorrectLetters": [
@@ -229,7 +293,7 @@
           ]
         },
         {
-          "id": "p3_q96",
+          "id": "p3_q104",
           "type": "multiple-choice",
           "stimulus": "I started cycling to school after my usual bus service changed. At first, I thought the journey would take longer, but I discovered a route through the park that was surprisingly quick. The only real problem is arriving with wet clothes when it rains. I now keep a spare set at school. Several friends have started joining me, so the journey has become something I look forward to. Why did the writer start cycling? What was unexpected? How does the writer deal with rainy days? A) By keeping extra clothes at school. B) By staying at home. C) By taking a taxi.",
           "options": [
@@ -239,6 +303,8 @@
             "How quick the route was.",
             "The price of a bicycle."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 2,
           "correctLetter": "C",
           "allCorrectLetters": [
@@ -248,7 +314,7 @@
           ]
         },
         {
-          "id": "p3_q97",
+          "id": "p3_q105",
           "type": "multiple-choice",
           "stimulus": "I joined a local theatre group hoping to act, but all the roles had already been given out. Instead, I helped build the scenery. I discovered that I enjoyed solving practical problems, such as making a wooden door look ancient. During the performance, nobody in the audience knew my name, but hearing their reaction when the curtain opened made me proud. Next year, I may choose backstage work again. What had the writer originally hoped to do? What did the writer enjoy about the actual work? What might the writer do next year?",
           "options": [
@@ -257,6 +323,8 @@
             "Stop attending the theatre.",
             "Only accept a leading role."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 1,
           "correctLetter": "B",
           "allCorrectLetters": [
@@ -266,7 +334,7 @@
           ]
         },
         {
-          "id": "p3_q98",
+          "id": "p3_q106",
           "type": "multiple-choice",
           "stimulus": "Our town’s repair café opens once a month. People bring broken objects, and volunteers help them repair things rather than throw them away. I took a lamp that had belonged to my grandmother. A volunteer found the problem quickly, but instead of doing everything herself, she explained each step and let me help. The lamp works again, and I feel more willing to try simple repairs at home. What is the repair café’s main purpose? How did the volunteer help the writer? A) By buying the lamp. B) By involving the writer in the repair. C) By taking the lamp away. What changed for the writer? A) An interest in collecting lamps. B) A wish to open a shop. C) Confidence about repairing things.",
           "options": [
@@ -274,6 +342,8 @@
             "To sell new electrical goods.",
             "To collect antiques."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 0,
           "correctLetter": "A",
           "allCorrectLetters": [
@@ -292,7 +362,7 @@
       "questionCount": 5,
       "questions": [
         {
-          "id": "p4_q109",
+          "id": "p4_q117",
           "type": "gap-fill",
           "stimulus": "At the station, I reached into my pocket for my ticket. (1) ___ I searched my coat and bag without success. Then a woman pointed at the floor. (2) ___ I thanked her and picked it up. Just then, I heard an announcement. (3) ___ I ran towards the platform and got on just in time.",
           "options": [
@@ -302,6 +372,8 @@
             "The ticket was lying beside my bag.",
             "She sold me a ticket for the following month."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 1,
           "correctLetter": "B",
           "allCorrectLetters": [
@@ -311,7 +383,7 @@
           ]
         },
         {
-          "id": "p4_q110",
+          "id": "p4_q118",
           "type": "gap-fill",
           "stimulus": "I was cycling home when the back of my bicycle began to feel strange. (1) ___ I stopped and phoned my uncle, who lived nearby. (2) ___ Together, we removed the wheel and repaired the problem. He explained everything as we worked. (3) ___ Next time, I may not need to call anyone.",
           "options": [
@@ -321,6 +393,8 @@
             "We decided to continue riding without checking it.",
             "Now I understand how to fix a puncture."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 2,
           "correctLetter": "C",
           "allCorrectLetters": [
@@ -330,7 +404,7 @@
           ]
         },
         {
-          "id": "p4_q111",
+          "id": "p4_q119",
           "type": "gap-fill",
           "stimulus": "We wanted to surprise my sister on her birthday. Before she arrived, everyone hid in the living room. (1) ___ When she opened the front door, she called out, but nobody answered. (2) ___ Then she switched on the living-room light. (3) ___ She was so surprised that she nearly dropped her bag.",
           "options": [
@@ -340,6 +414,8 @@
             "We had agreed not to make a sound.",
             "The guests arrived after she had gone to bed."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 3,
           "correctLetter": "D",
           "allCorrectLetters": [
@@ -349,7 +425,7 @@
           ]
         },
         {
-          "id": "p4_q112",
+          "id": "p4_q120",
           "type": "gap-fill",
           "stimulus": "We reached the campsite just before sunset and unpacked the tent. (1) ___ Without them, there was no way to put it up. Fortunately, the family beside us had some spare equipment. (2) ___ We thanked them and finally made our temporary home. It rained all night, but the weather changed the next morning. (3) ___ We ate breakfast outside. B) Bright sunshine warmed the campsite.",
           "options": [
@@ -358,6 +434,8 @@
             "The campsite had closed several years earlier.",
             "They lent us the pieces we were missing."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 0,
           "correctLetter": "A",
           "allCorrectLetters": [
@@ -367,7 +445,7 @@
           ]
         },
         {
-          "id": "p4_q113",
+          "id": "p4_q121",
           "type": "gap-fill",
           "stimulus": "I went to the library to prepare for my exams. The main reading room was very busy. (1) ___ A member of staff noticed me looking around and suggested going upstairs. (2) ___ I stayed there for three hours and completed everything I had planned. (3) ___ It has become my favourite place to study. E) Every desk was already occupied.",
           "options": [
@@ -376,6 +454,8 @@
             "There was a smaller room with plenty of empty desks.",
             "The building had no upper floor."
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 4,
           "correctLetter": "E",
           "allCorrectLetters": [
@@ -394,7 +474,7 @@
       "questionCount": 6,
       "questions": [
         {
-          "id": "p5_q124",
+          "id": "p5_q132",
           "type": "cloze",
           "stimulus": "Last month, I made a (1) ___ to walk to work more often. On the first morning, I left too late and nearly (2) ___ an important meeting. Now I am more (3) ___ of how long the journey takes.",
           "options": [
@@ -411,6 +491,8 @@
             "familiar",
             "pleased"
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 1,
           "correctLetter": "B",
           "allCorrectLetters": [
@@ -420,7 +502,7 @@
           ]
         },
         {
-          "id": "p5_q125",
+          "id": "p5_q133",
           "type": "cloze",
           "stimulus": "The market was so (1) ___ that we could hardly move between the stalls. It took us twenty minutes to (2) ___ the fruit seller. We decided to place an online (3) ___ next time.",
           "options": [
@@ -437,6 +519,8 @@
             "advice",
             "order"
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 2,
           "correctLetter": "C",
           "allCorrectLetters": [
@@ -446,7 +530,7 @@
           ]
         },
         {
-          "id": "p5_q126",
+          "id": "p5_q134",
           "type": "cloze",
           "stimulus": "Our teacher was very (1) ___ when we struggled with the task. She repeated the (2) ___ and gave us another example. After that, everyone began to make (3) ___.",
           "options": [
@@ -463,6 +547,8 @@
             "movement",
             "journey"
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 0,
           "correctLetter": "A",
           "allCorrectLetters": [
@@ -472,7 +558,7 @@
           ]
         },
         {
-          "id": "p5_q127",
+          "id": "p5_q135",
           "type": "cloze",
           "stimulus": "We wanted to go to the theatre, but we could not (1) ___ the tickets. We waited (2) ___ Friday to see whether cheaper seats became available. When none did, we watched a film at home (3) ___.",
           "options": [
@@ -489,6 +575,8 @@
             "instead",
             "rather"
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 3,
           "correctLetter": "D",
           "allCorrectLetters": [
@@ -498,7 +586,7 @@
           ]
         },
         {
-          "id": "p5_q128",
+          "id": "p5_q136",
           "type": "cloze",
           "stimulus": "Everyone in our flat takes (1) ___ for reducing energy use. We try to (2) ___ electricity by switching off unnecessary lights. Yesterday, I noticed that someone had left the television on, so I (3) ___ it off.",
           "options": [
@@ -515,6 +603,8 @@
             "put",
             "turned"
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 1,
           "correctLetter": "B",
           "allCorrectLetters": [
@@ -524,7 +614,7 @@
           ]
         },
         {
-          "id": "p5_q129",
+          "id": "p5_q137",
           "type": "cloze",
           "stimulus": "I was looking for a course (1) ___ for complete beginners. The college suggested one that I could (2) ___ after work. No previous (3) ___ was required.",
           "options": [
@@ -541,6 +631,8 @@
             "explanation",
             "examination"
           ],
+          "offers": null,
+          "people": null,
           "correctIndex": 2,
           "correctLetter": "C",
           "allCorrectLetters": [
@@ -559,55 +651,67 @@
       "questionCount": 6,
       "questions": [
         {
-          "id": "p6_q144",
+          "id": "p6_q152",
           "type": "open-cloze",
           "stimulus": "I have lived in this neighbourhood (1) ___ three years. The woman (2) ___ lives next door often gives me useful advice. She knows much more about the area (3) ___ I do.",
           "options": [],
+          "offers": null,
+          "people": null,
           "correctIndex": null,
           "correctLetter": null,
           "allCorrectLetters": []
         },
         {
-          "id": "p6_q145",
+          "id": "p6_q153",
           "type": "open-cloze",
           "stimulus": "We need (1) ___ leave early tomorrow. My bag is (2) ___ heavy for me to carry comfortably, so I am removing a few things. I hope I will still have (3) ___ space for my lunch.",
           "options": [],
+          "offers": null,
+          "people": null,
           "correctIndex": null,
           "correctLetter": null,
           "allCorrectLetters": []
         },
         {
-          "id": "p6_q146",
+          "id": "p6_q154",
           "type": "open-cloze",
           "stimulus": "I (1) ___ already sent my application. I have been waiting for a reply (2) ___ Monday, but the organiser has not contacted me (3) ___.",
           "options": [],
+          "offers": null,
+          "people": null,
           "correctIndex": null,
           "correctLetter": null,
           "allCorrectLetters": []
         },
         {
-          "id": "p6_q147",
+          "id": "p6_q155",
           "type": "open-cloze",
           "stimulus": "The exhibition (1) ___ opened by the mayor yesterday. Most of the pictures were painted (2) ___ local artists. My favourite was a painting (3) ___ the town’s old bridge.",
           "options": [],
+          "offers": null,
+          "people": null,
           "correctIndex": null,
           "correctLetter": null,
           "allCorrectLetters": []
         },
         {
-          "id": "p6_q148",
+          "id": "p6_q156",
           "type": "open-cloze",
           "stimulus": "You do not (1) ___ to pay to join the walk. Maps are provided free (2) ___ charge. We look forward (3) ___ seeing you on Saturday.",
           "options": [],
+          "offers": null,
+          "people": null,
           "correctIndex": null,
           "correctLetter": null,
           "allCorrectLetters": []
         },
         {
-          "id": "p6_q149",
+          "id": "p6_q157",
           "type": "open-cloze",
           "stimulus": "I used (1) ___ buy lunch every day. Now I bring food from home instead (2) ___ going to a café. It is one of (3) ___ best changes I have made to my routine.",
           "options": [],
+          "offers": null,
+          "people": null,
           "correctIndex": null,
           "correctLetter": null,
           "allCorrectLetters": []

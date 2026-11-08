@@ -1,6 +1,8 @@
 /**
- * parse-exam.js (v6) — lecture linéaire + extraction dédiée des réponses.
+ * parse-exam.js (v7) — lecture linéaire du fichier + extraction dédiée des réponses.
  * Génère db/questions.json.
+ *
+ * Partie 2 (matching) : sépare Offres et Personnes correctement.
  */
 
 const fs = require('fs');
@@ -27,6 +29,7 @@ const SERIES = [
 const NB_Q_PER_PART = { 1: 5, 2: 5, 3: 5, 4: 5, 5: 6, 6: 6 };
 
 let currentSerieId = null;
+let currentMiniTestNum = null;
 let questions = [];
 let qGlobalCounter = 0;
 
@@ -35,6 +38,8 @@ const MINI_TEST_RE = /^Mini-test\s+(\d+)(?:\s*—\s*(.*))?$/i;
 const CONSIGNE_RE = /^Consigne\s*:\s*/i;
 const RANGE_RE = /^Mini-tests\s+\d+\s+à\s+\d+/i;
 const MSG_LINE_RE = /^“/;
+const OFFRES_RE = /^Offres\s*$/i;
+const PERSONNES_RE = /^Personnes\s*$/i;
 
 function extractOptions(line) {
   const opts = [];
@@ -44,7 +49,7 @@ function extractOptions(line) {
   return opts;
 }
 
-function newQuestion(num, type, stimulus, options, serieId, msgIndex) {
+function newQuestion(num, type, stimulus, options, serieId, msgIndex, offers, people) {
   qGlobalCounter++;
   return {
     id: `p${serieId}_q${qGlobalCounter}`,
@@ -57,13 +62,15 @@ function newQuestion(num, type, stimulus, options, serieId, msgIndex) {
     msgIndex: msgIndex || 0,
     correctIndex: null,
     correctLetter: null,
-    allCorrectLetters: []
+    allCorrectLetters: [],
+    offers: offers || null,
+    people: people || null
   };
 }
 
 function flushPending(pending) {
   if (!pending) return;
-  const q = newQuestion(pending.num, pending.type, pending.stimulus, pending.options, pending.serieId, pending.msgIndex);
+  const q = newQuestion(pending.num, pending.type, pending.stimulus, pending.options, pending.serieId, pending.msgIndex, pending.offers, pending.people);
   questions.push(q);
 }
 
@@ -92,14 +99,33 @@ for (let i = 0; i < clean.length; i++) {
       stimulus: [],
       options: [],
       serieId: currentSerieId,
-      msgIndex: 0
+      msgIndex: 0,
+      offers: null,
+      people: null,
+      inOffers: false,
+      inPeople: false
     };
     if (currentSerieId === 1) serieMsgCounter = 0;
     continue;
   }
   if (!pending) continue;
 
+  // Détection des sections Offres / Personnes (partie 2)
+  if (currentSerieId === 2) {
+    if (line.match(OFFRES_RE)) {
+      pending.inOffers = true;
+      pending.inPeople = false;
+      continue;
+    }
+    if (line.match(PERSONNES_RE)) {
+      pending.inOffers = false;
+      pending.inPeople = true;
+      continue;
+    }
+  }
+
   if (currentSerieId === 1) {
+    // === Série 1 : chaque message “…” = 1 question ===
     const isMsg = MSG_LINE_RE.test(line);
     const opts = extractOptions(line);
     if (isMsg) {
@@ -110,7 +136,11 @@ for (let i = 0; i < clean.length; i++) {
         stimulus: [],
         options: [],
         serieId: pending.serieId,
-        msgIndex: 0
+        msgIndex: 0,
+        offers: null,
+        people: null,
+        inOffers: false,
+        inPeople: false
       };
       serieMsgCounter++;
       pending.msgIndex = serieMsgCounter;
@@ -125,13 +155,51 @@ for (let i = 0; i < clean.length; i++) {
           stimulus: [],
           options: [],
           serieId: pending.serieId,
-          msgIndex: 0
+          msgIndex: 0,
+          offers: null,
+          people: null,
+          inOffers: false,
+          inPeople: false
         };
       }
     } else {
       pending.stimulus.push(line.trim());
     }
+  } else if (currentSerieId === 2) {
+    // === Série 2 : Offres puis Personnes ===
+    if (pending.inOffers) {
+      const opts = extractOptions(line);
+      if (opts.length > 0) {
+        if (!pending.offers) pending.offers = [];
+        pending.offers.push(...opts);
+      }
+    } else if (pending.inPeople) {
+      // Les personnes sont des descriptions simples (sans lettre)
+      if (line.trim().length > 0) {
+        if (!pending.people) pending.people = [];
+        pending.people.push(line.trim());
+      }
+      // Quand on a les 3 personnes, créer la question
+      if (pending.people && pending.people.length === 3 && pending.offers && pending.offers.length >= 3) {
+        flushPending(pending);
+        pending = {
+          num: pending.num,
+          type: pending.type,
+          stimulus: [],
+          options: [],
+          serieId: pending.serieId,
+          msgIndex: 0,
+          offers: null,
+          people: null,
+          inOffers: false,
+          inPeople: false
+        };
+      }
+    } else {
+      // Avant "Offres" — ignorer
+    }
   } else {
+    // === Séries 3-6 : stimulus puis options ===
     const opts = extractOptions(line);
     if (opts.length > 0) {
       pending.options.push(...opts);
@@ -142,25 +210,21 @@ for (let i = 0; i < clean.length; i++) {
 }
 flushPending(pending);
 
-// Nettoyage stimulus séries 2-6
+// Nettoyage stimulus séries 3-6
 for (const q of questions) {
-  if (q.serieId === 1) continue;
+  if (q.serieId === 1 || q.serieId === 2) continue;
   q.stimulus = q.stimulus.replace(/^(Offres|Personnes)\s*/gi, '').trim();
 }
 
 // ------------------------------------------------------------------
-// Extraction des réponses : lignes du type "A / E / B — commentaire"
+// Extraction des réponses
 // ------------------------------------------------------------------
 const answerLines = [];
 for (let i = clean.length - 1; i >= 0; i--) {
   const l = clean[i].trim();
   if (!l) continue;
-  // Ligne de réponse : commence par une lettre A-E suivie de " / "
   if (/^[A-E]\s*\//.test(l)) {
-    answerLines.unshift(l); // on remet dans l'ordre du fichier (haut → bas)
-  } else if (answerLines.length > 0) {
-    // On a dépassé la section réponses (on remonte trop haut)
-    // Mais on continue de chercher au cas où il y en a d'autres plus haut
+    answerLines.unshift(l);
   }
 }
 
@@ -170,21 +234,14 @@ for (const l of answerLines) {
   if (letters) answerKey.push(letters.map(x => x.toUpperCase()));
 }
 
-console.log('=== Réponses ===');
-console.log('Lignes de réponse trouvées:', answerLines.length);
-console.log('Clés extraites:', answerKey.length);
-
-// Affectation : chaque ligne de réponse = 1 mini-test (sourceIndex), dans l'ordre
-// Série 1 : 1 ligne = 3 questions (3 lettres, une par message)
-// Série 2 : 1 ligne = 1 matching (5 lettres)
-// Autres : 1 ligne = 1 question (3 lettres)
+// Affectation des réponses
 let answerIdx = 0;
 const questionsBySerie = {};
 SERIES.forEach(s => { questionsBySerie[s.id] = questions.filter(q => q.serieId === s.id); });
 
 for (const sid of [1, 2, 3, 4, 5, 6]) {
   const qs = questionsBySerie[sid];
-  let nbAnswers = (sid === 2) ? 5 : 3;
+  let nbAnswers = (sid === 2) ? 3 : 3; // Série 2 : 3 lettres pour 3 personnes
   const bySource = {};
   qs.forEach(q => { if (!bySource[q.sourceIndex]) bySource[q.sourceIndex] = []; bySource[q.sourceIndex].push(q); });
   const sources = Object.keys(bySource).map(Number).sort((a, b) => a - b);
@@ -204,6 +261,13 @@ for (const sid of [1, 2, 3, 4, 5, 6]) {
           q.allCorrectLetters = [relevant[k]];
         }
       });
+    } else if (sid === 2) {
+      // Série 2 : les lettres sont dans l'ordre des personnes
+      group.forEach(q => {
+        q.allCorrectLetters = relevant;
+        q.correctLetter = relevant[0];
+        q.correctIndex = relevant[0].charCodeAt(0) - 'A'.charCodeAt(0);
+      });
     } else {
       group.forEach(q => {
         q.allCorrectLetters = relevant;
@@ -212,6 +276,11 @@ for (const sid of [1, 2, 3, 4, 5, 6]) {
       });
     }
   }
+}
+
+console.log('=== Parsing terminé ===');
+for (const sid of [1, 2, 3, 4, 5, 6]) {
+  console.log(`Série ${sid} (${SERIES.find(s => s.id === sid).title}): ${questionsBySerie[sid].length} questions`);
 }
 console.log('Clés de réponses consommées:', answerIdx, '/', answerKey.length);
 
@@ -228,6 +297,8 @@ const parts = SERIES.map(s => {
     title: q.title,
     stimulus: q.stimulus,
     options: q.options,
+    offers: q.offers,
+    people: q.people,
     correctIndex: q.correctIndex !== null ? q.correctIndex : null,
     correctLetter: q.correctLetter,
     allCorrectLetters: q.allCorrectLetters

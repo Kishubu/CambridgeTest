@@ -194,14 +194,30 @@ function renderOpenCloze(article, q, optionsContainer) {
 }
 
 function renderMatching(article, q, optionsContainer) {
-  const text = q.stimulus || '';
-  const offersPart = text.split('Personnes')[0] || text;
-  const peoplePart = text.split('Personnes')[1] || '';
+  // --- Récupérer les offres et personnes ---
+  let offers = q.offers;
+  let people = q.people;
 
-  const offers = extractListItems(offersPart);
-  const people = extractListItems(peoplePart);
+  // Si le parseur n'a pas séparé, on extrait du stimulus
+  if (!offers || !people) {
+    const text = q.stimulus || '';
+    const offrePart = text.split('Personnes')[0] || text;
+    const peoplePart = text.split('Personnes')[1] || '';
 
-  // État du matching : { [offreIndex]: personneIndex } ou null si délié
+    if (!offers) {
+      offers = [];
+      const re = /([A-E])\)\s*([^A-E\)]*?)(?=\s*[A-E]\)|$)/gs;
+      let m;
+      while ((m = re.exec(offrePart)) !== null) {
+        offers.push({ letter: m[1], text: m[2].trim() });
+      }
+    }
+    if (!people) {
+      people = extractListItems(peoplePart);
+    }
+  }
+
+  // État du matching : { [offreIndex]: personneIndex }
   const links = state.answers[q.id] && typeof state.answers[q.id] === 'object' && !Array.isArray(state.answers[q.id])
     ? { ...state.answers[q.id] }
     : {};
@@ -217,7 +233,6 @@ function renderMatching(article, q, optionsContainer) {
   colPeople.className = 'matching-col';
   colPeople.innerHTML = '<h4>Personnes</h4>';
 
-  // États visuels pour savoir quelle offre est sélectionnée en cours de lien
   let selectedOfferIdx = null;
 
   function renderPeopleColumn() {
@@ -225,12 +240,8 @@ function renderMatching(article, q, optionsContainer) {
     people.forEach((opt, pIdx) => {
       const item = document.createElement('div');
       item.className = 'match-item';
-      // Trouver quelle offre est liée à cette personne
       const linkedOffer = Object.entries(links).find(([o, p]) => parseInt(p, 10) === pIdx);
       if (linkedOffer) item.classList.add('linked');
-
-      const isSelected = pIdx === selectedOfferIdx && selectedOfferIdx !== null;
-      if (isSelected) item.classList.add('active');
 
       const letterEl = document.createElement('span');
       letterEl.className = 'match-linked-letter';
@@ -249,17 +260,14 @@ function renderMatching(article, q, optionsContainer) {
 
       item.addEventListener('click', () => {
         if (selectedOfferIdx === null) return;
-        // Lier / délier
         if (links[selectedOfferIdx] === pIdx) {
           delete links[selectedOfferIdx];
         } else {
-          // Enlever cette offre de toute autre personne si elle était liée
-          // (une offre ne peut être liée qu'à une seule personne)
           links[selectedOfferIdx] = pIdx;
         }
         state.answers[q.id] = links;
         selectedOfferIdx = null;
-        renderMatching(article, q, optionsContainer); // re-render
+        renderMatching(article, q, optionsContainer);
       });
       colPeople.appendChild(item);
     });
@@ -273,17 +281,16 @@ function renderMatching(article, q, optionsContainer) {
 
     const letterEl = document.createElement('span');
     letterEl.className = 'match-letter';
-    letterEl.textContent = String.fromCharCode(65 + oIdx);
+    letterEl.textContent = opt.letter || String.fromCharCode(65 + oIdx);
 
     const span = document.createElement('span');
-    span.textContent = escapeHtml(opt);
+    span.textContent = escapeHtml(opt.text || opt);
 
     item.appendChild(letterEl);
     item.appendChild(span);
 
     item.addEventListener('click', () => {
       if (item.classList.contains('linked')) {
-        // Décliquer = délier cette offre
         delete links[oIdx];
         selectedOfferIdx = null;
         state.answers[q.id] = links;
