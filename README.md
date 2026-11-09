@@ -1,34 +1,28 @@
-# CambridgeTest — B1 Preliminary Reading (front-only)
+# Cambridge B1 Preliminary — Reading (Entraînement)
 
-Entraînement à l'épreuve de **Reading du Cambridge B1 Preliminary** : 6 parties, 32 questions, minuteur de 45 minutes, base de données intégrée. Aucun back-end.
+Application **front-end uniquement** pour s'entraîner à l'épreuve de Reading du Cambridge B1 Preliminary (PET).
 
-## Structure
-```
-index.html           # SPA mobile-first (une seule page)
-css/style.css        # Responsive (UX inspirée Inspera)
-js/app.js            # Orchestrateur (états, minuteur, écrans)
-js/db.js             # Chargement de la BDD intégrée
-js/timer.js          # Minuteur 45 min
-js/ui.js             # Rendu des 6 types de questions + score
-db/questions.json    # BDD intégrée générée une fois (JSON)
-scripts/parse-exam.js # Génération du JSON depuis le .txt (une seule passe)
-Cambridge B1 Exam.txt # Fichier source des questions
-```
+## Fonctionnalités
+- 6 parties (Multiple Choice, Matching, Reading, Sentence Insertion, Multiple Choice Cloze, Open Cloze)
+- Minuteur de 45 minutes (mise en condition réelle)
+- Sélection aléatoire des questions depuis la base de données intégrée
+- Interface mobile-first
+- Correction automatique et écran de résultats détaillé
+- Aucun back-end, aucune API, fonctionne hors ligne une fois chargé
+
+## Base de données
+Le contenu est dans `cambridge_b1_pet_tests_by_series.json` (6 séries, source de vérité).
 
 ## Lancer en local
 ```bash
+# avec Python (déjà installé)
 python3 -m http.server 5000
-# ou
+# puis ouvrir http://localhost:5000
+
+# ou avec npx
 npx serve .
 ```
-Puis ouvrir http://localhost:5000
 
 ## Déploiement GitHub Pages
-1. Dans le repo GitHub : **Settings → Pages**
-2. Source : **Deploy from a branch**, branche `main`, dossier `/ (root)`
-3. Le site est alors accessible sur `https://<utilisateur>.github.io/CambridgeTest/`
-
-## Générer à nouveau la BDD (optionnel)
-```bash
-node scripts/parse-exam.js
-```
+1. Pousser sur la branche `main`
+2. Settings → Pages → Source : `main` / `/ (root)`

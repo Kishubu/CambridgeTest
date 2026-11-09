@@ -1,13 +1,21 @@
 {
   "name": "cambridge-b1-reading",
   "version": "1.0.0",
-  "description": "Entraînement Cambridge B1 Preliminary Reading — front-only, base de données intégrée (JSON), minuteur 45 min, mobile-first.",
+  "description": "Entra\u00eenement Cambridge B1 Preliminary Reading \u2014 front-only, base de donn\u00e9es int\u00e9gr\u00e9e (JSON), minuteur 45 min, mobile-first.",
   "private": true,
   "scripts": {
     "start": "npx serve .",
     "dev": "npx serve .",
     "parse": "node scripts/parse-exam.js"
   },
-  "keywords": ["cambridge", "b1", "reading", "exam", "frontend", "spa"],
-  "author": ""
+  "keywords": [
+    "cambridge",
+    "b1",
+    "reading",
+    "exam",
+    "frontend",
+    "spa"
+  ],
+  "author": "",
+  "type": "module"
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Cambridge B1 — Reading (entraînement)</title>
+  <title>Cambridge B1 Preliminary — Reading</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -13,12 +13,9 @@
       <h1>🎓 Cambridge B1<br><span class="sub">Preliminary — Reading</span></h1>
     </header>
     <div class="home-body">
-      <p class="home-intro">Prépare-toi à l’épreuve de Reading du Cambridge B1 Preliminary. Six parties, 32 questions, 45 minutes.</p>
-      <div class="parts-grid" id="parts-grid"></div>
-      <div class="home-actions">
-        <button id="btn-start-test" class="btn btn-primary btn-large">Démarrer le test (45 min)</button>
-      </div>
-      <p class="home-note">Base de données intégrée — aucun back-end, fonctionne hors ligne une fois chargé.</p>
+      <p class="home-intro">Préparez-vous à l'épreuve de Reading du Cambridge B1 Preliminary. Six parties, 20 questions, 45 minutes.</p>
+      <button id="btn-start-test" class="btn btn-primary btn-large">Démarrer le test (45 min)</button>
+      <p class="home-note">Front-end uniquement — aucun back-end, fonctionne hors ligne une fois chargé.</p>
     </div>
   </section>
 
@@ -27,20 +24,21 @@
     <header class="screen-header test-header">
       <div class="timer-wrap">
         <div id="timer-display" class="timer">45:00</div>
-        <div id="timer-warn" class="timer-warn hidden">Temps restant : moins de 5 minutes</div>
+        <div id="timer-warn" class="timer-warn hidden">Il reste moins de 5 minutes</div>
       </div>
       <div class="progress-wrap">
         <div id="progress-text" class="progress-text">Partie 1 sur 6</div>
         <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
       </div>
-      <button id="btn-finish-test" class="btn btn-danger btn-small">Terminer le test</button>
+      <button id="btn-finish-test" class="btn btn-danger btn-small">Valider mon examen</button>
     </header>
+
     <div class="test-body">
-      <div id="part-nav" class="part-nav"></div>
-      <div id="test-content" class="test-content"></div>
+      <nav id="part-nav" class="part-nav" role="tablist" aria-label="Parties de l'examen"></nav>
+      <div id="test-content" class="test-content" role="tabpanel"></div>
       <div class="test-controls">
-        <button id="btn-prev" class="btn btn-outline btn-small hidden">Précédent</button>
-        <button id="btn-next" class="btn btn-primary btn-small hidden">Suivant</button>
+        <button id="btn-prev" class="btn btn-outline btn-small">Partie précédente</button>
+        <button id="btn-next" class="btn btn-primary btn-small">Partie suivante</button>
       </div>
     </div>
   </section>
@@ -48,19 +46,24 @@
   <!-- === ÉCRAN DU SCORE === -->
   <section id="screen-score" class="screen">
     <header class="screen-header">
-      <h1>Test terminé</h1>
+      <h1>Résultat de votre examen</h1>
     </header>
     <div class="score-body">
-      <div id="score-big" class="score-big">0 / 32</div>
+      <div id="score-big" class="score-big">0 / 20</div>
       <div id="score-pct" class="score-pct">0 %</div>
+      <div id="score-time" class="score-time"></div>
       <div id="score-detail" class="score-detail"></div>
       <div class="score-actions">
-        <button id="btn-retry" class="btn btn-primary btn-large">Refaire un test</button>
+        <button id="btn-review" class="btn btn-outline btn-large">Revoir mes erreurs</button>
+        <button id="btn-retry" class="btn btn-primary btn-large">Recommencer un examen</button>
         <button id="btn-home" class="btn btn-outline btn-large">Accueil</button>
       </div>
     </div>
   </section>
 
-  <script src="js/app.js" type="module"></script>
+  <script type="module">
+    import { app } from './js/app.js';
+    app.init();
+  </script>
 </body>
 </html>
