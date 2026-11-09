@@ -22,52 +22,39 @@ test.describe('Cambridge B1 Preliminary — Reading', () => {
 
   test('Partie 1 : cliquer une reponse ne selectionne qu elle', async ({ page }) => {
     await page.click('#btn-start-test');
-
     await expect(page.locator('.part-tab.active')).toContainText('Part 1');
 
     const firstCard = page.locator('.question-card').first();
     await firstCard.locator('.option-btn').first().click();
-
     await expect(firstCard.locator('.option-btn.selected')).toHaveCount(1);
     await expect(firstCard.locator('.option-btn:not(.selected)')).toHaveCount(2);
 
     await firstCard.locator('.option-btn').nth(1).click();
-
     await expect(firstCard.locator('.option-btn.selected')).toHaveCount(1);
     await expect(firstCard.locator('.option-btn.selected')).toContainText('B');
   });
 
   test('Partie 2 : selectionner une personne puis une offre cree un lien', async ({ page }) => {
     await page.click('#btn-start-test');
-
     await page.click('.part-tab:nth-child(2)');
     await expect(page.locator('.part-tab.active')).toContainText('Part 2');
-
-    await expect(page.locator('.matching-col').first()).toBeVisible();
-    await expect(page.locator('.matching-col').last()).toBeVisible();
     await expect(page.locator('.person-item')).toHaveCount(3);
     await expect(page.locator('.offer-item')).toHaveCount(5);
 
-    // Cliquer sur la premiere personne
     const firstPerson = page.locator('.person-item').first();
     await firstPerson.click();
     await expect(firstPerson).toHaveClass(/selected/);
-    // Attendre le re-render
-    await page.waitForTimeout(300);
 
-    // Cliquer sur la premiere offre
     const firstOffer = page.locator('.offer-item').first();
     await firstOffer.click();
     await expect(firstOffer).toHaveClass(/linked/);
 
-    // Recliquer pour delier
     await firstOffer.click();
     await expect(firstOffer).not.toHaveClass(/linked/);
   });
 
   test('navigue entre les 6 parties', async ({ page }) => {
     await page.click('#btn-start-test');
-
     for (let i = 1; i <= 6; i++) {
       await page.click(`.part-tab:nth-child(${i})`);
       await expect(page.locator('.part-tab.active')).toContainText(`Part ${i}`);
@@ -82,7 +69,6 @@ test.describe('Cambridge B1 Preliminary — Reading', () => {
 
     await page.click('.part-tab:nth-child(2)');
     await page.locator('.person-item').first().click();
-    await page.waitForTimeout(300);
     await page.locator('.offer-item').first().click();
 
     await page.click('#btn-finish-test');

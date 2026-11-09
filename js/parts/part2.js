@@ -48,6 +48,20 @@ export const Part2 = {
       <p class="matching-hint">1) Cliquez sur une personne. 2) Cliquez sur une offre pour lier. Recliquez sur l'offre liée pour délier.</p>
     `;
 
+    // Mise à jour directe des classes sans re-render complet
+    const updateOfferLink = (offerId, personId) => {
+      const offerEl = container.querySelector(`.offer-item[data-id="${offerId}"]`);
+      if (offerEl) {
+        if (personId) {
+          offerEl.classList.add('linked');
+          const personEl = container.querySelector(`.person-item[data-id="${personId}"]`);
+          if (personEl) personEl.classList.add('selected');
+        } else {
+          offerEl.classList.remove('linked');
+        }
+      }
+    };
+
     container.querySelectorAll('.matching-item').forEach(item => {
       item.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -59,29 +73,44 @@ export const Part2 = {
 
         if (type === 'person') {
           const newSelected = (currentSelected === id) ? null : id;
+          // Mise à jour visuelle immédiate
+          container.querySelectorAll('.person-item').forEach(p => p.classList.remove('selected'));
           if (newSelected) {
             selectionState.set(container, newSelected);
+            item.classList.add('selected');
           } else {
             selectionState.delete(container);
           }
-          this.render(container, part, answers, onChange);
-        } else if (type === 'offer') {
+          return;
+        }
+
+        if (type === 'offer') {
           if (!currentSelected) return;
 
           const newAnswers = { ...answers };
           const current = newAnswers[currentSelected];
 
           if (current === id) {
+            // Délier
             delete newAnswers[currentSelected];
+            updateOfferLink(id, null);
+            selectionState.delete(container);
           } else {
+            // Lier : retirer l'ancienne association de cette offre si elle existe
             const alreadyUsed = part.people.find(p => answers[p.id] === id && p.id !== currentSelected);
-            if (alreadyUsed) delete newAnswers[alreadyUsed.id];
+            if (alreadyUsed) {
+              delete newAnswers[alreadyUsed.id];
+              updateOfferLink(id, null);
+              const personEl = container.querySelector(`.person-item[data-id="${alreadyUsed.id}"]`);
+              if (personEl) personEl.classList.remove('selected');
+            }
             newAnswers[currentSelected] = id;
+            updateOfferLink(id, currentSelected);
+            selectionState.delete(container);
           }
 
-          selectionState.delete(container);
           onChange(newAnswers);
-          this.render(container, part, newAnswers, onChange);
+          return;
         }
       });
     });
