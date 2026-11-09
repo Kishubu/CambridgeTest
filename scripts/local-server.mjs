@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 
 const root = process.cwd();
-const PORT = 5001;
+const PORT = parseInt(process.env.PORT || '5001', 10);
 const mime = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',

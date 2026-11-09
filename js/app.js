@@ -101,3 +101,8 @@ export const app = {
     UI.renderReview(this.reviewData, this.session);
   }
 };
+
+// Exposer l'instance pour les tests/debug (désactivé en production si besoin)
+if (typeof window !== 'undefined') {
+  window.__app = app;
+}
