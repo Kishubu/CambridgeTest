@@ -1,7 +1,7 @@
 {
   "name": "cambridge-b1-reading",
   "version": "1.0.0",
-  "description": "Entra\u00eenement Cambridge B1 Preliminary Reading \u2014 front-only, base de donn\u00e9es int\u00e9gr\u00e9e (JSON), minuteur 45 min, mobile-first.",
+  "description": "Entraînement Cambridge B1 Preliminary Reading — front-only, base de données intégrée (JSON), minuteur 45 min, mobile-first.",
   "private": true,
   "scripts": {
     "start": "npx serve .",
@@ -17,5 +17,18 @@
     "spa"
   ],
   "author": "",
-  "type": "module"
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kishubu/CambridgeTest.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kishubu/CambridgeTest/issues"
+  },
+  "homepage": "https://github.com/Kishubu/CambridgeTest#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  }
 }
