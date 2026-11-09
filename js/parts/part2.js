@@ -46,44 +46,44 @@ export const Part2 = {
       <p class="matching-hint">1) Cliquez sur une personne. 2) Cliquez sur une offre pour lier. Recliquez sur l'offre liée pour délier.</p>
     `;
 
-    container.onclick = (e) => {
-      const item = e.target.closest('.matching-item');
-      if (!item) return;
-      e.stopPropagation();
-      e.preventDefault();
+    // Listeners individuels (plus fiable que la délégation après innerHTML)
+    container.querySelectorAll('.matching-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
 
-      const type = item.dataset.type;
-      const id = item.dataset.id;
-      const currentSelected = container.dataset.selectedPersonId || null;
+        const type = item.dataset.type;
+        const id = item.dataset.id;
+        const currentSelected = container.dataset.selectedPersonId || null;
 
-      if (type === 'person') {
-        // Sélectionner / désélectionner la personne
-        const newSelected = (currentSelected === id) ? null : id;
-        if (newSelected) {
-          container.dataset.selectedPersonId = newSelected;
-        } else {
+        if (type === 'person') {
+          const newSelected = (currentSelected === id) ? null : id;
+          if (newSelected) {
+            container.dataset.selectedPersonId = newSelected;
+          } else {
+            delete container.dataset.selectedPersonId;
+          }
+          this.render(container, part, answers, onChange);
+        } else if (type === 'offer') {
+          if (!currentSelected) return;
+
+          const newAnswers = { ...answers };
+          const current = newAnswers[currentSelected];
+
+          if (current === id) {
+            delete newAnswers[currentSelected];
+          } else {
+            const alreadyUsed = part.people.find(p => answers[p.id] === id && p.id !== currentSelected);
+            if (alreadyUsed) delete newAnswers[alreadyUsed.id];
+            newAnswers[currentSelected] = id;
+          }
+
           delete container.dataset.selectedPersonId;
+          onChange(newAnswers);
+          this.render(container, part, newAnswers, onChange);
         }
-        this.render(container, part, answers, onChange);
-      } else if (type === 'offer') {
-        if (!currentSelected) return;
-
-        const newAnswers = { ...answers };
-        const current = newAnswers[currentSelected];
-
-        if (current === id) {
-          delete newAnswers[currentSelected];
-        } else {
-          const alreadyUsed = part.people.find(p => answers[p.id] === id && p.id !== currentSelected);
-          if (alreadyUsed) delete newAnswers[alreadyUsed.id];
-          newAnswers[currentSelected] = id;
-        }
-
-        delete container.dataset.selectedPersonId;
-        onChange(newAnswers);
-        this.render(container, part, newAnswers, onChange);
-      }
-    };
+      });
+    });
   }
 };
 
