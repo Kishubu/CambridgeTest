@@ -91,6 +91,10 @@ test('obtenir un score de 100% (20/20) en sélectionnant toutes les bonnes répo
   console.log('[STEP] verification ecran de score');
   await expect(page.locator('#screen-score')).toHaveClass(/active/);
 
+  // Capture d'écran de la page de résultat
+  await page.screenshot({ path: 'test-results/full-run-result.png', fullPage: true });
+  console.log('[INFO] capture d'écran enregistrée : test-results/full-run-result.png');
+
   // Vérifier le score 20/20 et 100%
   console.log('[STEP] verification score');
   await expect(page.locator('#score-big')).toHaveText('20 / 20');
