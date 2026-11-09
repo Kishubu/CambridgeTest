@@ -44,6 +44,12 @@ export class ExamData {
       const picked = this.shuffle(allQuestions).slice(0, 5);
       picked.sort((a, b) => a.number - b.number);
       for (const q of picked) {
+        // L'id brut d'une question n'est pas unique entre les tests de la série
+        // (ex: "q1" existe dans tous les tests). Comme la partie 1 pioche dans
+        // plusieurs tests, on préfixe par le test source pour que la clé
+        // d'état de réponse (answers) soit unique par question et ne confonde
+        // pas deux questions qui partagent le même id brut.
+        q.id = `${q.__sourceTestId}::${q.id}`;
         answers[this.key(1, q.id)] = null;
       }
       parts.push({
