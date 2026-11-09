@@ -85,9 +85,22 @@ export const Part2 = {
         }
 
         if (type === 'offer') {
+          const newAnswers = { ...answers };
+          const isLinked = linked.has(id);
+          const linkedPerson = isLinked ? [...linked.entries()].find(([oid]) => oid === id)?.[1] : null;
+
+          // Reclic sur une offre liee sans personne selectionnee : delier directement
+          if (isLinked && !currentSelected) {
+            delete newAnswers[linkedPerson];
+            updateOfferLink(id, null);
+            const personEl = container.querySelector(`.person-item[data-id="${linkedPerson}"]`);
+            if (personEl) personEl.classList.remove('selected');
+            onChange(newAnswers);
+            return;
+          }
+
           if (!currentSelected) return;
 
-          const newAnswers = { ...answers };
           const current = newAnswers[currentSelected];
 
           if (current === id) {
