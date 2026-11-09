@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-test.use({ baseURL: 'http://localhost:5001' });
-
 test('obtenir un score de 100% (20/20) en sélectionnant toutes les bonnes réponses', async ({ page }) => {
   // Écouter les erreurs de page pour diagnostiquer
   const pageErrors = [];
@@ -14,7 +12,7 @@ test('obtenir un score de 100% (20/20) en sélectionnant toutes les bonnes répo
   });
 
   console.log('[STEP] chargement page daccueil');
-  await page.goto('/');
+  await page.goto('http://localhost:5001/');
   await page.waitForSelector('#screen-home.active', { state: 'visible' });
 
   console.log('[STEP] demarrage examen');
