@@ -181,3 +181,10 @@ function escapeHtml(text) {
   div.textContent = String(text);
   return div.innerHTML;
 }
+
+// Debug: log renderPart calls
+const originalRenderPart = UI.renderPart;
+UI.renderPart = function(part, container, answers, onChange) {
+  console.error('UI.renderPart called:', part ? part.id : 'null', 'people:', part?.people?.length, 'offers:', part?.offers?.length);
+  originalRenderPart.call(this, part, container, answers, onChange);
+};

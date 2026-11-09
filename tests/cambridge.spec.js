@@ -36,7 +36,7 @@ test.describe('Cambridge B1 Preliminary — Reading', () => {
 
   test('Partie 2 : selectionner une personne puis une offre cree un lien', async ({ page }) => {
     await page.click('#btn-start-test');
-    await page.click('.part-tab:nth-child(2)');
+    await page.click('.part-tab:nth-child(2)'); // Aller à Partie 2 maintenant que le test est lancé
     await expect(page.locator('.part-tab.active')).toContainText('Part 2');
     await expect(page.locator('.person-item')).toHaveCount(3);
     await expect(page.locator('.offer-item')).toHaveCount(5);

@@ -14,53 +14,35 @@ export const Part2 = {
     const isPersonSelected = (id) => selectedPersonId === id;
 
     container.innerHTML = `
-      <div class="part-instruction">Associez chaque personne à l'offre qui lui convient.</div>
       <div class="matching-cols">
         <div class="matching-col">
           <h4>Offres (A–E)</h4>
-          ${part.offers.map(o => {
+          ${part.offers?.map(o => {
             const personId = linked.get(o.id);
-            const person = personId ? part.people.find(p => p.id === personId) : null;
-            return `
-              <div class="matching-item offer-item ${isOfferLinked(o.id) ? 'linked' : ''}" data-type="offer" data-id="${o.id}">
-                <span class="matching-badge">${escapeHtml(o.label)}</span>
-                <span class="matching-prompt">${escapeHtml(o.text)}</span>
-                ${person ? `<span style="font-size:0.7rem;color:#14532d;margin-left:auto;">→ ${person.number}</span>` : ''}
-              </div>
-            `;
-          }).join('')}
+            const person = personId ? part.people.find(p => o.id === personId) : null;
+            return `<div class="matching-item offer-item ${isOfferLinked(o.id) ? 'linked' : ''}" data-type="offer" data-id="${o.id}">
+              <span class="matching-badge">${escapeHtml(o.label)}</span>
+              <span class="matching-prompt">${escapeHtml(o.text)}</span>
+              ${person ? `<span class="match-indicator">→ ${escapeHtml(person.number)}</span>` : ''}
+            </div>`;
+          }).join('') || '<p>Aucune offre</p>'}
         </div>
         <div class="matching-col">
           <h4>Personnes</h4>
-          ${part.people.map(p => {
+          ${part.people?.map(p => {
             const v = answers[p.id];
             const offer = v ? part.offers.find(o => o.id === v) : null;
-            return `
-              <div class="matching-item person-item ${v ? 'selected' : ''} ${isPersonSelected(p.id) ? 'selected' : ''}" data-type="person" data-id="${p.id}">
-                <span class="matching-badge">${p.number}</span>
-                <span class="matching-prompt">${escapeHtml(p.prompt)}</span>
-                ${v ? `<span style="font-size:0.7rem;color:#1d4ed8;margin-left:auto;">→ ${escapeHtml(o.label)}</span>` : ''}
-              </div>
-            `;
-          }).join('')}
+            const isSelected = v !== null && v !== '';
+            return `<div class="matching-item person-item ${isSelected ? 'selected' : ''}" data-type="person" data-id="${p.id}">
+              <span class="matching-badge">${p.number}</span>
+              <span class="matching-prompt">${escapeHtml(p.prompt)}</span>
+              ${isSelected ? `<span class="match-indicator">→ ${escapeHtml(offer.label)}</span>` : ''}
+            </div>`;
+          }).join('') || '<p>Aucune personne</p>'}
         </div>
       </div>
-      <p class="matching-hint">1) Cliquez sur une personne. 2) Cliquez sur une offre pour lier. Recliquez sur l'offre liée pour délier.</p>
+      <p class="matching-hint">1) Cliquez sur une personne. 2) Cliquez sur une offre pour lier. Recliquez sur une offre déjà liée pour la délier.</p>
     `;
-
-    // Mise à jour directe des classes sans re-render complet
-    const updateOfferLink = (offerId, personId) => {
-      const offerEl = container.querySelector(`.offer-item[data-id="${offerId}"]`);
-      if (offerEl) {
-        if (personId) {
-          offerEl.classList.add('linked');
-          const personEl = container.querySelector(`.person-item[data-id="${personId}"]`);
-          if (personEl) personEl.classList.add('selected');
-        } else {
-          offerEl.classList.remove('linked');
-        }
-      }
-    };
 
     container.querySelectorAll('.matching-item').forEach(item => {
       item.addEventListener('click', (e) => {
@@ -73,56 +55,44 @@ export const Part2 = {
 
         if (type === 'person') {
           const newSelected = (currentSelected === id) ? null : id;
-          // Mise à jour visuelle immédiate
-          container.querySelectorAll('.person-item').forEach(p => p.classList.remove('selected'));
-          if (newSelected) {
-            selectionState.set(container, newSelected);
-            item.classList.add('selected');
-          } else {
-            selectionState.delete(container);
-          }
+          container.querySelectorAll('.matching-item').forEach(el => {
+            if (el.dataset.type === 'person') el.classList.toggle('selected', el.dataset.id === newSelected);
+          });
+          selectionState.set(container, newSelected);
           return;
         }
 
         if (type === 'offer') {
-          const newAnswers = { ...answers };
           const isLinked = linked.has(id);
           const linkedPerson = isLinked ? [...linked.entries()].find(([oid]) => oid === id)?.[1] : null;
 
-          // Reclic sur une offre liee sans personne selectionnee : delier directement
-          if (isLinked && !currentSelected) {
+          if (isLinked) {
+            // Dés-lien direct de l'offre si elle est déjà liée
+            const newAnswers = { ...answers };
             delete newAnswers[linkedPerson];
-            updateOfferLink(id, null);
-            const personEl = container.querySelector(`.person-item[data-id="${linkedPerson}"]`);
-            if (personEl) personEl.classList.remove('selected');
+            updateOfferLink(item, null);
+            selectionState.delete(container);
             onChange(newAnswers);
+            this.render(container, part, newAnswers, onChange);
             return;
           }
 
-          if (!currentSelected) return;
+          if (!currentSelected) return; // Pas de personne sélectionnée, rien à faire
 
-          const current = newAnswers[currentSelected];
-
-          if (current === id) {
-            // Délier
+          const newAnswers = { ...answers };
+          if (currentSelected === id) {
+            // Lier la personne sélectionnée à l'offre : délier
             delete newAnswers[currentSelected];
-            updateOfferLink(id, null);
+            updateOfferLink(item, null);
             selectionState.delete(container);
           } else {
-            // Lier : retirer l'ancienne association de cette offre si elle existe
-            const alreadyUsed = part.people.find(p => answers[p.id] === id && p.id !== currentSelected);
-            if (alreadyUsed) {
-              delete newAnswers[alreadyUsed.id];
-              updateOfferLink(id, null);
-              const personEl = container.querySelector(`.person-item[data-id="${alreadyUsed.id}"]`);
-              if (personEl) personEl.classList.remove('selected');
-            }
+            // Lier la personne sélectionnée à l'offre
             newAnswers[currentSelected] = id;
-            updateOfferLink(id, currentSelected);
+            updateOfferLink(item, currentSelected);
             selectionState.delete(container);
           }
-
           onChange(newAnswers);
+          this.render(container, part, newAnswers, onChange);
           return;
         }
       });
@@ -130,4 +100,14 @@ export const Part2 = {
   }
 };
 
-function escapeHtml(t){if(t==null)return'';const d=document.createElement('div');d.textContent=String(t);return d.innerHTML;}
+function updateOfferLink(offerEl, personId) {
+  if (offerEl) {
+    if (personId) {
+      offerEl.classList.add('linked');
+    } else {
+      offerEl.classList.remove('linked');
+    }
+  }
+}
+
+function escapeHtml(t) { if (t == null) return ''; const d = document.createElement('div'); d.textContent = String(t); return d.innerHTML; }
