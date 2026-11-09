@@ -247,7 +247,6 @@ body {
 }
 
 /* États du matching */
-.matching-item.dimmed { opacity: 0.45; filter: grayscale(0.4); }
 .matching-item.selected-person { border-color: #2563eb; background: #dbeafe; }
 .matching-item.linked { border-color: #15803d; background: #dcfce7; color: #14532d; cursor: default; }
 

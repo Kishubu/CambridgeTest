@@ -1,3 +1,5 @@
+const selectionState = new WeakMap();
+
 export const Part2 = {
   render(container, part, answers, onChange) {
     const linked = new Map();
@@ -6,7 +8,7 @@ export const Part2 = {
       if (v) linked.set(v, p.id);
     }
 
-    const selectedPersonId = container.dataset.selectedPersonId || null;
+    const selectedPersonId = selectionState.get(container) || null;
 
     const isOfferLinked = (id) => linked.has(id);
     const isPersonSelected = (id) => selectedPersonId === id;
@@ -20,7 +22,7 @@ export const Part2 = {
             const personId = linked.get(o.id);
             const person = personId ? part.people.find(p => p.id === personId) : null;
             return `
-              <div class="matching-item offer-item ${isOfferLinked(o.id) ? 'linked' : ''} ${selectedPersonId ? 'dimmed' : ''}" data-type="offer" data-id="${o.id}">
+              <div class="matching-item offer-item ${isOfferLinked(o.id) ? 'linked' : ''}" data-type="offer" data-id="${o.id}">
                 <span class="matching-badge">${escapeHtml(o.label)}</span>
                 <span class="matching-prompt">${escapeHtml(o.text)}</span>
                 ${person ? `<span style="font-size:0.7rem;color:#14532d;margin-left:auto;">→ ${person.number}</span>` : ''}
@@ -46,7 +48,6 @@ export const Part2 = {
       <p class="matching-hint">1) Cliquez sur une personne. 2) Cliquez sur une offre pour lier. Recliquez sur l'offre liée pour délier.</p>
     `;
 
-    // Listeners individuels (plus fiable que la délégation après innerHTML)
     container.querySelectorAll('.matching-item').forEach(item => {
       item.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -54,14 +55,14 @@ export const Part2 = {
 
         const type = item.dataset.type;
         const id = item.dataset.id;
-        const currentSelected = container.dataset.selectedPersonId || null;
+        const currentSelected = selectionState.get(container) || null;
 
         if (type === 'person') {
           const newSelected = (currentSelected === id) ? null : id;
           if (newSelected) {
-            container.dataset.selectedPersonId = newSelected;
+            selectionState.set(container, newSelected);
           } else {
-            delete container.dataset.selectedPersonId;
+            selectionState.delete(container);
           }
           this.render(container, part, answers, onChange);
         } else if (type === 'offer') {
@@ -78,7 +79,7 @@ export const Part2 = {
             newAnswers[currentSelected] = id;
           }
 
-          delete container.dataset.selectedPersonId;
+          selectionState.delete(container);
           onChange(newAnswers);
           this.render(container, part, newAnswers, onChange);
         }

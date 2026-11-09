@@ -48,14 +48,19 @@ test.describe('Cambridge B1 Preliminary — Reading', () => {
     await expect(page.locator('.person-item')).toHaveCount(3);
     await expect(page.locator('.offer-item')).toHaveCount(5);
 
+    // Cliquer sur la premiere personne
     const firstPerson = page.locator('.person-item').first();
     await firstPerson.click();
     await expect(firstPerson).toHaveClass(/selected/);
+    // Attendre le re-render
+    await page.waitForTimeout(300);
 
+    // Cliquer sur la premiere offre
     const firstOffer = page.locator('.offer-item').first();
     await firstOffer.click();
     await expect(firstOffer).toHaveClass(/linked/);
 
+    // Recliquer pour delier
     await firstOffer.click();
     await expect(firstOffer).not.toHaveClass(/linked/);
   });
@@ -77,6 +82,7 @@ test.describe('Cambridge B1 Preliminary — Reading', () => {
 
     await page.click('.part-tab:nth-child(2)');
     await page.locator('.person-item').first().click();
+    await page.waitForTimeout(300);
     await page.locator('.offer-item').first().click();
 
     await page.click('#btn-finish-test');
