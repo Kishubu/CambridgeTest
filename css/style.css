@@ -245,3 +245,16 @@ body {
   .part-tab { font-size: 0.65rem; padding: 6px 8px; }
   .btn-large { font-size: 0.9rem; padding: 14px 16px; }
 }
+
+/* États du matching */
+.matching-item.dimmed { opacity: 0.45; filter: grayscale(0.4); }
+.matching-item.selected-person { border-color: #2563eb; background: #dbeafe; }
+.matching-item.linked { border-color: #15803d; background: #dcfce7; color: #14532d; cursor: default; }
+
+.review-item { background: #f8fafc; border: 1px solid #eef2f6; border-radius: 8px; padding: 10px; margin-bottom: 8px; }
+.review-q { font-size: 0.85rem; font-weight: 700; color: #111827; margin-bottom: 6px; }
+.review-status { font-size: 0.75rem; font-weight: 800; margin-bottom: 6px; }
+.review-status.ok { color: #15803d; }
+.review-status.bad { color: #dc2626; }
+.review-status.none { color: #6b7280; }
+.review-answer, .review-correct { font-size: 0.8rem; color: #4b5563; margin-bottom: 4px; }
