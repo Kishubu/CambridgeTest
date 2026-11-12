@@ -17,12 +17,14 @@ export function scoreSession(session) {
       partMax = part.questions.length;
       for (const q of part.questions) {
         const userAns = getAns(q.id);
-        const correct = part.getCorrectAnswer(q);
-        const isCorrect = userAns === correct;
+        const correctLabel = part.getCorrectAnswer(q);
+        const correctOpt = q.options.find(o => o.label === correctLabel);
+        const correctOptId = correctOpt ? correctOpt.id : null;
+        const isCorrect = userAns === correctOptId;
         if (isCorrect) { partScore++; partCorrect++; } else if (userAns === null) { partUnanswered++; } else { partIncorrect++; }
-        detail.push({ id: q.id, type: 'mc', prompt: q.prompt, userAns, correct, isCorrect,
+        detail.push({ id: q.id, type: 'mc', prompt: q.prompt, userAns, correct: correctLabel, isCorrect,
           userText: userAns ? q.options.find(o => o.id === userAns)?.text : null,
-          correctText: q.options.find(o => o.label === correct)?.text });
+          correctText: correctOpt ? correctOpt.text : null });
       }
     } else if (part.id === 2) {
       partMax = part.people.length;
@@ -40,12 +42,14 @@ export function scoreSession(session) {
       partMax = part.questions.length;
       for (const q of part.questions) {
         const userAns = getAns(q.id);
-        const correct = part.getCorrectAnswer(q);
-        const isCorrect = userAns === correct;
+        const correctLabel = part.getCorrectAnswer(q);
+        const correctOpt = q.options.find(o => o.label === correctLabel);
+        const correctOptId = correctOpt ? correctOpt.id : null;
+        const isCorrect = userAns === correctOptId;
         if (isCorrect) { partScore++; partCorrect++; } else if (userAns === null) { partUnanswered++; } else { partIncorrect++; }
-        detail.push({ id: q.id, type: 'mc', prompt: q.prompt, userAns, correct, isCorrect,
+        detail.push({ id: q.id, type: 'mc', prompt: q.prompt, userAns, correct: correctLabel, isCorrect,
           userText: userAns ? q.options.find(o => o.id === userAns)?.text : null,
-          correctText: q.options.find(o => o.label === correct)?.text });
+          correctText: correctOpt ? correctOpt.text : null });
       }
     } else if (part.id === 4) {
       partMax = part.questions.length;
